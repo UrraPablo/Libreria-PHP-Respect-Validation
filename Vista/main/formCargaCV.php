@@ -18,8 +18,8 @@ include_once '../Estructura/head.php';
             <div class="row row-cols-2">
                     <div class="col p-3">
                         <!--NOMBRE-->
-                        <label for="name" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="nombre">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre">
                     </div>
                     <div class="col p-3">
                         <!--APELLIDO-->
@@ -52,7 +52,7 @@ include_once '../Estructura/head.php';
             <div class="col-md-4 d-flex justify-content-center align-items-center">
                  <!--carga de la imagen-->
                  <label for="imagen" class="">Imagen de Perfil</label>
-                 <input type="file" class="form-control" id="file" name="file">
+                 <input type="file" class="form-control" id="imagen" name="imagen">
 
             </div>
         </div>
@@ -187,12 +187,12 @@ include_once '../Estructura/head.php';
         <div class="row">
         <h5>Estilos del Curriculum</h5>
         <div class="col-6 mb-3 mt-3">
-            <label  class="form-label" for="color1">Seleccione un color: </label>
-            <input type="color" class="form-control form-control-color"  name="color1" id="color1" value="#563d7c">
+            <label  class="form-label" for="color">Seleccione un color: </label>
+            <input type="color" class="form-control form-control-color"  name="color" id="color" value="#563d7c">
         </div>
         <div class="col-6 mb-3 mt-3">
-        <label  class="form-label" for="color1">Seleccione una Tipografia: </label>
-        <select class="form-select" aria-label="Default select example" name="tipografia" id="tipografia">
+        <label  class="form-label" for="letra">Seleccione una Tipografia: </label>
+        <select class="form-select" aria-label="Default select example" name="letra" id="letra">
             <option value="" selected>letra 1</option>
             <option value="">letra 2</option>
             <option value="">letra 3</option>
