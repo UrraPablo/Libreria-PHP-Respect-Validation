@@ -25,7 +25,7 @@ function verEstructura($e){
 
 // NUEVA FORMA DE USAR EL METODO AUTOLOAD
 spl_autoload_register(function ($clase) {
-    // echo "Cargamos la clase  ".$clase."<br>" ;
+     //echo "Cargamos la clase  ".$clase."<br>" ;
      $directorys = array(
          $GLOBALS['ROOT'].'Modelo/',
          $GLOBALS['ROOT'].'Control/',
