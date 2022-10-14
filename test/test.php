@@ -2,7 +2,7 @@
 // PROBANDO LA FUNCIONALIDAD DE REPECT VALIDATION 
 
 // carga de la libreria 
-require 'Vista/librerias/vendor/autoload.php'; 
+include_once '../Vista/librerias/vendor/autoload.php'; 
 // Respect \ Validation \ Validator   es la clase   v es un alias 
 use Respect\Validation\Validator as v; 
 use Respect\Validation\Exceptions\NestedValidationException;
