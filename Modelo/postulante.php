@@ -3,7 +3,7 @@
 class Postulante extends BaseDatos{
 
     // ATRIBUTOS 
-    private $id;
+   // private $id;
     private $nombre;
     private $apellido;
     private $dni;
@@ -43,8 +43,8 @@ class Postulante extends BaseDatos{
     }// fin constructor
 
     // METODO SETEAR
-    public function setear($id,$name,$apellido,$dni,$fecha,$email,$telefono,$imagen,$estudios,$titulo,$experc,$inglesEscr,$inglesH,$link,$color,$letra){
-        $this->setId($id);
+    public function setear($name,$apellido,$dni,$fecha,$email,$telefono,$imagen,$estudios,$titulo,$experc,$inglesEscr,$inglesH,$link,$color,$letra){
+        //$this->setId($id);
         $this->setNombre($name);
         $this->setApellido($apellido);
         $this->setDni($dni);
@@ -66,9 +66,9 @@ class Postulante extends BaseDatos{
 
 
     // *********METODOS GET***********
-    public function getId(){
-        return $this->id;
-    }// fin function
+   // public function getId(){
+     //   return $this->id;
+    //}// fin function
     
     public function getNombre(){
         return $this->nombre;
@@ -137,9 +137,9 @@ class Postulante extends BaseDatos{
 
 
     // ********METODOS SET**********
-    public function setId($id){
-        $this->id=$id;
-    }// fin function
+   // public function setId($id){
+     //   $this->id=$id;
+    //}// fin function
 
     public function setNombre($name){
         $this->nombre=$name;             
@@ -219,7 +219,7 @@ class Postulante extends BaseDatos{
                     $salida=true; 
                     $R=$this->Registro(); // recupera los registros de la tabla  con la ID dada
                     //setear($name,$apellido,$dni,$fecha,$email,$telefono,$imagen,$estudios,$titulo,$experc,$inglesEscr,$inglesH,$link,$color,$letra)
-                    $this->setear($R['Id'],$R['Nombre'],$R['Apellido'],$R['Dni'],$R['FechaNacimiento'],$R['Mail'],$R['Telefono'],$R['Imagen'],$R['Estudios'],
+                    $this->setear($R['Nombre'],$R['Apellido'],$R['Dni'],$R['FechaNacimiento'],$R['Mail'],$R['Telefono'],$R['Imagen'],$R['Estudios'],
                     $R['Titulo'],$R['Experiencia'],$R['InglesEscrito'],$R['InglesHablado'],$R['link'],$R['color'],$R['Letra']);
 
                 }// fin if 
@@ -277,7 +277,7 @@ class Postulante extends BaseDatos{
         $salida=false;
         $sql="UPDATE postulante SET Nombre='".$this->getNombre()."', Apellido='".$this->getApellido()."', FechaNacimiento=".$this->getFechaNacimiento().", Mail='".$this->getMail()."',Telefono=".$this->getTelefono().", Imagen='".$this->getImagen()."', Estudios='".$this->getEstudios()."', Titulo='".$this->getTitulo()."', 
         Experiencia='".$this->getExperiencia()."', InglesEscrito='".$this->getInglesEscrito()."', InglesHablado='".$this->getInglesHablado()."', link='".$this->getLink()."', color='".$this->getColor()."', letra='".$this->getLetra()."'
-         WHERE Id=".$this->getId();
+         WHERE Id=".$this->getDni();
         if($this->Iniciar()){
             if($this->Ejecutar($sql)){
                 $salida=true;
@@ -306,7 +306,7 @@ class Postulante extends BaseDatos{
      */
     public function eliminar(){
         $salida=false;
-        $sql="DELETE FROM postulante WHERE Id=".$this->getId();
+        $sql="DELETE FROM postulante WHERE Id=".$this->getDni();
         if($this->Iniciar()){
             if($this->Ejecutar($sql)){
                 $salida=true;
@@ -339,7 +339,7 @@ class Postulante extends BaseDatos{
                 // creo un obj nuevo de postulante ? o lo hago directo con this?
                 while($row=$this->Registro()){
                     $obj=new Postulante();
-                    $obj->setear($row['Id'],$row['Nombre'],$row['Apellido'],$row['Dni'],$row['FechaNacimiento'],$row['Mail'],$row['Telefono'],$row['Imagen'],
+                    $obj->setear($row['Nombre'],$row['Apellido'],$row['Dni'],$row['FechaNacimiento'],$row['Mail'],$row['Telefono'],$row['Imagen'],
                     $row['Estudios'],$row['Titulo'],$row['Experiencia'],$row['InglesEscrito'],$row['InglesHablado'],$row['link'],$row['color'],$row['Letra']);
                     array_push($arrayPostulantes,$obj);   // opcion con this. Sino creo un obj y lo reemplazo por el this
                 }// fin while 
