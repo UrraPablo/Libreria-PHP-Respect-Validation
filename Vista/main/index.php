@@ -2,19 +2,22 @@
 include_once '../../configuracion.php';
 include_once '../Estructura/head.php'; 
 
-$datos = ["dni"=>"32123456","apellido"=>"Perez","nombre"=>"Juan","color"=>"#ff0000"];
 
+$datos = data_submitted();
 
+$obj= new AbmPostulante();
+
+$lista = $obj->buscar(null);
 ?>
 
 
 <main class="container mt-3">
 <div class="d-flex justify-content-center">
-<button class="btn btn-primary m-3"> Cargar Nuevo CV</button>
+<a class="btn btn-primary m-3" role="button" href="formCargaCV.php?accion=nuevo"> Cargar Nuevo CV</a>
 </div>
   <!-- Si extsten cvs en base de datos muestra la tabla con los datos  -->
   <?php
-  if (count($datos) == 0) {  
+  if (count($lista) == 0) {  
     ?>
 <div class="container">
     <h6 class="text-center">No existen curriculums cargados aún.</h6>
@@ -37,18 +40,21 @@ $datos = ["dni"=>"32123456","apellido"=>"Perez","nombre"=>"Juan","color"=>"#ff00
   </thead>
   <tbody>
     <!-- bucle que carga las filas -->
+    <?php
+ if( count($lista)>0){
+  foreach ($lista as $obj) { ?>
     <tr>
-      <th scope="row"><?php echo $datos['dni']?></th>
-      <td><?php echo $datos['nombre']?></td>
-      <td><?php echo $datos['apellido']?></td>
+      <th scope="row"><?php echo $obj->getDni()?></th>
+      <td><?php echo $obj->getNombre()?></td>
+      <td><?php echo $obj->getApellido()?></td>
       <td>
         <div class="d-flex justify-content-center align-items-center">
-          <div class="color rounded" style="background-color: <?php echo $datos['color']?>; width: 25px; height:25px;" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $datos['color']?>">
+          <div class="color rounded" style="background-color: <?php echo $obj->getColor()?>; width: 25px; height:25px;" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $obj->getColor()?>">
         </div>
       </td>
-      <td class="d-flex justify-content-evenly"><div><a href="../accion/accionEditarCV.php?accion=editar&id=<?php echo $datos['dni'] ?>" ><i class="bi bi-pencil-square"></i></a></div><div><a href="../accion/accionEliminarCV.php?accion=borrar&id=<?php echo $datos['dni'] ?>" ><i class="bi bi-trash3"></i></a></div></td>
+      <td class="d-flex justify-content-evenly"><div><a href="formCargaCV.php?accion=editar&id=<?php echo $obj->getId() ?>" ><i class="bi bi-pencil-square"></i></a></div><div><a href="formCargaCV.php?accion=borrar&id=<?php echo $obj->getId() ?>" ><i class="bi bi-trash3"></i></a></div></td>
     </tr>
-    
+    <?php } } ?>
   </tbody>
 </table>
 
