@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="min-height: 100%;  position: relative;">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,16 +9,13 @@
     <!--LINK ICONS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
-
+<body style="margin-bottom:100px;">
     <!--HEDAER -->
-    <div class="container-fluid bg-light">
+    <header class="container-fluid bg-light p-3 shadow">
         <h1 class="text-center text-primary">
             CV creator 
         </h1>
-    </div>    
-
-<body>
-
+    </header>    
 
     
     

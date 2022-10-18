@@ -9,7 +9,7 @@ $PROYECTO ='Libreria-PHP-Respect-Validation';
 
 //variable que almacena el directorio del proyecto
 
-$ROOT ="C:/xampp/htdocs"."/$PROYECTO/";//$_SERVER['DOCUMENT_ROOT']."/$PROYECTO/";
+$ROOT =$_SERVER['DOCUMENT_ROOT']."/$PROYECTO/";
 
 include_once($ROOT.'util/funciones.php'); // CONCATENA EL DIRECTORIO ROOT CON EL SCRIPT FUNCIONES.PHP
 
