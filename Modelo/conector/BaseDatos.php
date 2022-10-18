@@ -9,13 +9,14 @@ class BaseDatos extends PDO {
     private $pass;
   	private $debug;
   	private $conec;
+    private $error; 
   	private $indice;
   	private $resultado;
     
     public function __construct(){
         $this->engine = 'mysql';
         $this->host = 'localhost';
-        $this->database = 'infoautos';
+        $this->database = 'datospostulante';
         $this->user = 'root';
         $this->pass = '';
         $this->debug = true;
@@ -94,12 +95,13 @@ class BaseDatos extends PDO {
     public function Ejecutar($sql){
         $this->setError("");
         $this->setSQL($sql);
+       
 
         if ( stristr($sql,"insert") ){ // se desea NSERT ? 
                 $resp =  $this->EjecutarInsert($sql);
         }// fin if 
         // se desea UPDATE o DELETE ? 
-        if ( stristr($sql,"update")OR stristr($sql,"delete")){
+        if ( stristr($sql,"update")OR stristr($sql,"delete")){ // strisstr encuentra la primera concurrencia de update o delete
                 $resp =  $this->EjecutarDeleteUpdate($sql);
         }// fin if 
         
@@ -162,7 +164,7 @@ class BaseDatos extends PDO {
    private function EjecutarSelect($sql){
        $cant = -1;
        //echo("Metodo ejecutar de base de datos <br>");
-       //echo("<br>".$sql."<br>");
+       //echo("\n".$sql."\n");
        $resultado=parent::query($sql);
        //var_dump($resultado);
        if(!$resultado){
@@ -234,11 +236,7 @@ class BaseDatos extends PDO {
       
       return $this->resultado;
    }
-   
-   
-   
-   
-
+    
    
  
 } 

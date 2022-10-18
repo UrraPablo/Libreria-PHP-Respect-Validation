@@ -1,6 +1,6 @@
 <?php
 // 
-class Modelo_Postulante extends BaseDatos{
+class Postulante extends BaseDatos{
 
     // ATRIBUTOS 
     private $nombre;
@@ -24,6 +24,7 @@ class Modelo_Postulante extends BaseDatos{
 
     // CONSTRUCTOR 
     public function __construct(){
+        parent::__construct();
         $this->nombre="";
         $this->apellido="";
         $this->fechaNacimiento="";
@@ -182,8 +183,8 @@ class Modelo_Postulante extends BaseDatos{
         $this->link=$link;             
     }// fin function
 
-    public function setColor($name){
-        $this->nombre=$name;             
+    public function setColor($color){
+        $this->color=$color;             
     }// fin function
 
     public function setLetra($l){
@@ -199,15 +200,17 @@ class Modelo_Postulante extends BaseDatos{
      * @return boolean
      */
     public function buscar(){
-        $salida=0; // inicializacion del valor de retorno
-        $sql = "SELECT * FROM postulante WHERE id=".$this->getDni();
+        $salida=false; // inicializacion del valor de retorno
+        $sql = "SELECT * FROM postulante WHERE Dni=".$this->getDni();
         if($this->Iniciar()){// inicializa la conexion
             $salida=$this->Ejecutar($sql); 
             if($salida>-1){
                 if($salida>0){
+                    $salida=true; 
                     $R=$this->Registro(); // recupera los registros de la tabla  con la ID dada
-                    $this->setear($R['Nombre'],$R['Apellido'],$R['FechaNacimiento'],$R['Dni'],$R['Mail'],$R['Telefono'],$R['Imagen'],$R['Estudios'],$R['Titulo'],
-                $R['Experiencia'],$R['InglesEscrito'],$R['InglesHablado'],$R['link'],$R['color'],$R['Letra']);
+                    //setear($name,$apellido,$dni,$fecha,$email,$telefono,$imagen,$estudios,$titulo,$experc,$inglesEscr,$inglesH,$link,$color,$letra)
+                    $this->setear($R['Nombre'],$R['Apellido'],$R['Dni'],$R['FechaNacimiento'],$R['Mail'],$R['Telefono'],$R['Imagen'],$R['Estudios'],
+                    $R['Titulo'],$R['Experiencia'],$R['InglesEscrito'],$R['InglesHablado'],$R['link'],$R['color'],$R['Letra']);
 
                 }// fin if 
 
@@ -319,14 +322,14 @@ class Modelo_Postulante extends BaseDatos{
      */
     public function listar(){
         $arrayPostulantes=array();
-        $sql="SELECT * FROM postulantes";
+        $sql="SELECT * FROM postulante";
         $respuesta=$this->Ejecutar($sql);
         if($respuesta>-1){
             if($respuesta>0){
                 // creo un obj nuevo de postulante ? o lo hago directo con this?
                 while($row=$this->Registro()){
                     $this->setear($row['Nombre'],$row['Apellido'],$row['Dni'],$row['FechaNacimiento'],$row['Mail'],$row['Telefono'],$row['Imagen'],
-                    $row['Estudios'],$row['Titulo'],$row['Experiencia'],$row['InglesEscrito'],$row['InglesHablado'],$row['link'],$row['color'],$row['letra']);
+                    $row['Estudios'],$row['Titulo'],$row['Experiencia'],$row['InglesEscrito'],$row['InglesHablado'],$row['link'],$row['color'],$row['Letra']);
                     array_push($arrayPostulantes,$this);   // opcion con this. Sino creo un obj y lo reemplazo por el this
 
                 }// fin while 

@@ -32,10 +32,10 @@ spl_autoload_register(function ($clase) {
          $GLOBALS['ROOT'].'Modelo/conector/',
          $GLOBALS['ROOT'].'util',
      );
-      print_r($directorys) ;
+      //print_r($directorys) ;
      foreach($directorys as $directory){
          if(file_exists($directory.$clase . '.php')){
-             // echo "se incluyo".$directory.$class_name . '.php';
+             // echo "se incluyo".$directory.$clase . '.php';
              require_once($directory.$clase . '.php');
              return;
          }
