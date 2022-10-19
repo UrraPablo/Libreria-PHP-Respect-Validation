@@ -1,4 +1,5 @@
 <?php
+$Titulo = "Listado de Postulantes";
 include_once '../../configuracion.php';
 include_once '../Estructura/head.php'; 
 
