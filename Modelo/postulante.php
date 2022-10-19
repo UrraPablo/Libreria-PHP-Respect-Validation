@@ -333,7 +333,7 @@ class Postulante extends BaseDatos{
      */
     public function listar($parametro=""){
         $arrayPostulantes=array();
-        $sql="SELECT * FROM postulante";
+        $sql="SELECT * FROM postulante ";
         if($parametro!=""){
             $sql.='WHERE'.$parametro;
         }// fin if 
