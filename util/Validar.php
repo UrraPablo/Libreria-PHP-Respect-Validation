@@ -1,6 +1,7 @@
 <?php
+
 // CLASE VALIDAR 
-include_once '../libs/vendor/autoload.php'; 
+include_once $GLOBALS['ROOT'].'/libs/vendor/autoload.php'; 
 use Respect\Validation\Validator as v; 
 use Respect\Validation\Exceptions\NestedValidationException;
 
@@ -12,6 +13,31 @@ class Validar{
      * @return array
      */
     public function validaNyA($texto){
+        $salida=null; 
+
+        $userNameValidator=v::alpha(' ')->notEmpty()->length(null,15);
+       // $userNameValidator->validate($texto);// valida que no este vacio, que contenga solo letras y con una longitud na mayor a 15
+        try{
+            $userNameValidator->assert($texto); 
+
+        }// fin try
+        catch(NestedValidationException $ex){
+                    // For all messages, the {{name}} variable is available for templates.
+                    // If you do not define a name it uses the input to replace this placeholder.
+            $salida=$ex->getMessages(['alpha'=>'{{name}} Debe contener solo letras',
+        'notEmpty'=>'{{name}} No puede estar vacio',
+        'length'=>'{{name}} No puede superar los 15 caracteres']); 
+
+        }// fin catch
+        return $salida; 
+
+    }// fin function 
+    
+    /**VALIDAR FECHA DE NACIMIENTO
+     * @param texto
+     * @return array
+     */
+    public function validaFecha($texto){
         $salida=null; 
 
         $userNameValidator=v::alpha(' ')->notEmpty()->length(null,15);
@@ -84,12 +110,12 @@ class Validar{
 
 
     }// fin metodo validaTelefono
-
+    
     /**METODO nivel de Ingles
      * @param texto
      * @return array 
      */
-    public function nivelIngles($texto){
+    public function validaIngles($texto){
         $salida=null; 
         $texto=strtolower($texto);
         $userNameValidator=v::anyOf(v::identical('basico'),v::identical('intermedio'),v::identical('avanzado'))->alpha()->notEmpty();
@@ -108,11 +134,11 @@ class Validar{
         return $salida;
 
     }// fin metodo nivelIngles 
-
+    
     /**METODO VALIDA LINK 
      * @param string url
      * @return array
-    */
+     */
     public function validaLink($url){
         $url=strtolower($url); 
         $salida=null;
@@ -132,7 +158,7 @@ class Validar{
 
         return $salida;
     }// fin metodo valida link
-
+    
     /**METODO VALIDA MAIL
      * @param string mail
      * @return array
@@ -150,9 +176,9 @@ class Validar{
 
         }// fin catch
         return $salida; 
-
+        
     }// fin metodo valida mail
-
+    
     /**METODO VALIDA IMAGEN
      * Valida que la extension de la imagen sea la que corresponda
      * @param string
@@ -170,12 +196,87 @@ class Validar{
             $salida=$ex->getMessages(['extension'=>'{{name}} La imgen debe tener una extension valida (jpeg/jpg/png/gif/bmp/pcx)',
             'notEmpty'=>'{{name}} El nombre del archivo no puede estar vacio',
             'noWhitespace'=>'{{name}} El nombre del archivo no puede tener espacios vacios']);
-
+            
         }// fin catch
         return $salida; 
-
+        
     }// fin metodo valida imagen
+    
+    /**METODO ESTUDIOS
+     * @param texto
+     * @return array 
+     */
+    public function validaEstudios($texto){
+        $salida=null; 
+        $texto=strtolower($texto);
+        $userNameValidator=v::anyOf(v::identical('Terciario'),v::identical('Secundario'),v::identical('Universitario'))->alpha()->notEmpty();
+        // v::anyOf(v::intVal(), v::floatVal())->validate(15.5); // true  {{compareTo}}-> identical
+        // con anyOf   el mensaje aparece la ultima condicion dentro , avanzado.
+        try{
+            $userNameValidator->assert($texto);
+        }// fin try
+        catch(NestedValidationException $ex){
+            $salida=$ex->getMessages(['identical'=>'{{compareTo}} El nivel de Ingles debe estar en uno de los rangos (basico/intermedio/avanzado)',
+            'alpha'=>'{{name}} Debe contener caracteres alfabetico',
+            'notEmpty'=>'{{name}} No debe estar vacio']);
+            
+        }// fin catch
+        
+        return $salida;
+        
+    }// fin metodo Estudios 
+    
+    /**VALIDAR Titulo
+     * @param texto
+     * @return array
+     */
+    public function validaTitulo($texto){
+        $salida=null; 
 
+        $userNameValidator=v::alpha(' ')->notEmpty()->length(null,25);
+       // $userNameValidator->validate($texto);// valida que no este vacio, que contenga solo letras y con una longitud na mayor a 15
+        try{
+            $userNameValidator->assert($texto); 
+
+        }// fin try
+        catch(NestedValidationException $ex){
+                    // For all messages, the {{name}} variable is available for templates.
+                    // If you do not define a name it uses the input to replace this placeholder.
+            $salida=$ex->getMessages(['alpha'=>'{{name}} Debe contener solo letras',
+        'notEmpty'=>'{{name}} No puede estar vacio',
+        'length'=>'{{name}} No puede superar los 25 caracteres']); 
+
+        }// fin catch
+
+        return $salida; 
+    }// fin metodo valida titulo
+    
+    /**VALIDAR Experiencia
+     * @param texto
+     * @return array
+     */
+    public function validaExperiencia($texto){
+        $salida=null; 
+
+        $userNameValidator=v::alpha(' ')->notEmpty()->length(null,400);
+       // $userNameValidator->validate($texto);// valida que no este vacio, que contenga solo letras y con una longitud na mayor a 15
+        try{
+            $userNameValidator->assert($texto); 
+
+        }// fin try
+        catch(NestedValidationException $ex){
+                    // For all messages, the {{name}} variable is available for templates.
+                    // If you do not define a name it uses the input to replace this placeholder.
+            $salida=$ex->getMessages([
+        'notEmpty'=>'{{name}} No puede estar vacio',
+        'length'=>'{{name}} No puede superar los 400 caracteres']); 
+
+        }// fin catch
+
+        return $salida; 
+
+    }// fin function Eperiencia
+    
     
     /**METODO VALIDA COLOR
      * Valida el color de tipo SEA EL HEX COLOR 
@@ -227,14 +328,5 @@ class Validar{
 
 
 }// fin Clase Validar
-
-/** 
-$obj=new Validar();
-$nombre='';
-$r=$obj->validaLetra($nombre);
-var_dump($r);
-*/
-
-
 
 ?>

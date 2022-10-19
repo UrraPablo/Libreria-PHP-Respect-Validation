@@ -5,6 +5,7 @@ include_once '../Estructura/head.php';
 
 $datos=data_submitted();
 $obj = new AbmPostulante();
+var_dump($datos);
 
 ?>
 
@@ -21,16 +22,9 @@ $obj = new AbmPostulante();
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--NOMBRE-->
                         <label for="nombre" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control <?php if (isset($datos['msgNombre'])) echo ( $datos['msgNombre'] !=null) ? "is-invalid" : "is-valid"; ?>" id="Nombre" name="Nombre" placeholder="Nombre">
+                    <input type="text" class="form-control <?php if (isset($datos['msgNombre'])) echo ( $datos['msgNombre'] !='ok') ? "is-invalid" : "is-valid"; ?>" id="Nombre" name="Nombre" placeholder="Nombre" value="<?php echo $datos['Nombre'] ?>" >
                         <?php 
-                            if (isset($datos['msgNombre'])) 
-                                if( $datos['msgNombre'] !=null){ 
-                                    echo '<div id="validationServer03Feedback" class="invalid-feedback">';
-                                    foreach($datos['msgNombre'] as $msg) {
-                                        echo $msg." ";
-                                    };
-                                    echo '</div>';
-                                    } 
+                            if (isset($datos['msgNombre'])) echo ($datos['msgNombre'] !='ok') ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgNombre'].'</div>' : '';
                         ?>
                     </div>
 
