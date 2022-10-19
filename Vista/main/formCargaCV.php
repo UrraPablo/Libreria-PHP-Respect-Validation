@@ -1,4 +1,5 @@
 <?php
+$Titulo = " Formulario de Carga y Edición de CV";
 include_once '../../configuracion.php';
 include_once '../Estructura/head.php'; 
 
