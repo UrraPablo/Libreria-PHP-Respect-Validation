@@ -17,6 +17,7 @@ class AbmPostulante{
         && array_key_exists('color',$arrayDatos)&& array_key_exists('Letra',$arrayDatos)){
             
             $obj=new Postulante();
+            // setear($id,$name,$apellido,$dni,$fecha,$email,$telefono,$imagen,$estudios,$titulo,$experc,$inglesEscr,$inglesH,$link,$color,$letra){
             $obj->setear($arrayDatos['Nombre'],$arrayDatos['Apellido'],$arrayDatos['Dni'],$arrayDatos['FechaNacimiento'],$arrayDatos['Mail'],
             $arrayDatos['Telefono'],$arrayDatos['Imagen'],$arrayDatos['Estudios'],$arrayDatos['Titulo'],$arrayDatos['Experiencia'],
             $arrayDatos['InglesEscrito'],$arrayDatos['InglesHablado'],$arrayDatos['link'],$arrayDatos['color'],$arrayDatos['Letra']);

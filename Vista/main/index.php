@@ -9,6 +9,7 @@ $datos = data_submitted();
 $obj= new AbmPostulante();
 
 $lista = $obj->buscar(null);
+//var_dump($lista); 
 ?>
 
 
@@ -53,7 +54,7 @@ $lista = $obj->buscar(null);
           <div class="color rounded" style="background-color: <?php echo $obj->getColor()?>; width: 25px; height:25px;" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $obj->getColor()?>">
         </div>
       </td>
-      <td class="d-flex justify-content-evenly"><div><a href="formCargaCV.php?accion=editar&id=<?php echo $obj->getId() ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar" ><i class="bi bi-pencil-square"></i></a></div><div><a href="formCargaCV.php?accion=borrar&id=<?php echo $obj->getId() ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar" ><i class="bi bi-trash3"></i></a></div></td>
+      <td class="d-flex justify-content-evenly"><div><a href="formCargaCV.php?accion=editar&id=<?php echo $obj->getDni() ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar" ><i class="bi bi-pencil-square"></i></a></div><div><a href="formCargaCV.php?accion=borrar&id=<?php echo $obj->getDni() ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar" ><i class="bi bi-trash3"></i></a></div></td>
     </tr>
     <?php } } ?>
   </tbody>

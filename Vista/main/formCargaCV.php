@@ -21,42 +21,42 @@ $obj = new AbmPostulante();
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--NOMBRE-->
                         <label for="nombre" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre">
+                        <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Nombre">
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--APELLIDO-->
                         <label for="apellido" class="form-label">Apellido:</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder="apellido">
+                        <input type="text" class="form-control" id="Apellido" name="Apellido" placeholder="Apellido">
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--FECHA NACIMIENTO-->
                         <label for="fechaNacimiento" class="form-label">Fecha Nacimiento:</label>
-                        <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento">
+                        <input type="text" class="form-control" id="FechaNacimiento" name="FechaNacimiento">
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--DNI-->
                         <label for="dni" class="form-label">DNI:</label>
-                        <input type="number" class="form-control" id="dni" name="dni" placeholder="33000111">
+                        <input type="number" class="form-control" id="Dni" name="Dni" placeholder="33000111">
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--EMAIL-->
                         <label for="name" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="mail" name="mail" placeholder="ejemplo@gmail.com">
+                        <input type="text" class="form-control" id="Mail" name="Mail" placeholder="ejemplo@gmail.com">
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--TELEFONO-->
                         <label for="telefono" class="form-label">Telefono:</label>
-                        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="299-4111444">
+                        <input type="text" class="form-control" id="Telefono" name="Telefono" placeholder="299-4111444">
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <label for="link" class="form-label">Ingrese su Link de Linkdin o Github</label>
-                        <input type="url" class="form-control" id="link" name="link">
+                        <input type="text" class="form-control" id="link" name="link">
                     </div>
                     <!--FIN DIV DE LINK DE GITHUB O LINKEDIN-->
                     <!--carga de la imagen-->
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <label for="imagen" class="form-label">Imagen de Perfil</label>
-                        <input type="file" class="form-control" id="imagen" name="imagen">
+                        <input type="file" class="form-control" id="Imagen" name="Imagen">
                     </div>            
             </div>
         </div>
@@ -78,15 +78,15 @@ $obj = new AbmPostulante();
                                 <div class="accordion-body">
                                     <p>Ultimos Estudios Completados</p>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="EstudiosCompletados" id="secundario">
+                                        <input class="form-check-input" type="radio" name="Estudios" id="Secundario">
                                         <label class="form-check-label" for="secundario">Secundario</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="EstudiosCompletados" id="Terciario">
+                                        <input class="form-check-input" type="radio" name="Estudios" id="Terciario">
                                         <label class="form-check-label" for="Terciario">Terciario</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="EstudiosCompletados" id="Universitario">
+                                        <input class="form-check-input" type="radio" name="Estudios" id="Universitario">
                                         <label class="form-check-label" for="Universitario">Universitario</label>
                                     </div>
                                     <!--TITULO-->
@@ -108,7 +108,7 @@ $obj = new AbmPostulante();
                                 <div class="accordion-body">
                                     <div class="mb-3">
                                         <label for="textArea" class="form-label">Descripcion</label>
-                                        <textarea class="form-control" name="experiencia" id="textArea" rows="3" cols="10"></textarea>
+                                        <textarea class="form-control" name="Experiencia" id="textArea" rows="3" cols="10"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -126,19 +126,19 @@ $obj = new AbmPostulante();
                                         <div class="col-sm-12 col-md-6">                                    
                                             <p>Nivel del Inglés Escrito</p>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="escritoB" id="escritoB">
+                                                <input class="form-check-input" type="radio" name="InglesEscrito" id="escritoB">
                                                 <label class="form-check-label" for="escritoB">
                                                     Basico 
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="escritoI" id="escritoI">
+                                                <input class="form-check-input" type="radio" name="InglesEscrito" id="escritoI">
                                                 <label class="form-check-label" for="escritoI">
                                                     Intermedio
                                                 </label>
                                             </div>
                                             <div class="form-check mb-3">
-                                                <input class="form-check-input" type="radio" name="escritoA" id="escritoA">
+                                                <input class="form-check-input" type="radio" name="InglesEscrito" id="escritoA">
                                                 <label class="form-check-label" for="escritoA">
                                                     Avanzado
                                                 </label>
@@ -148,19 +148,19 @@ $obj = new AbmPostulante();
                                             <!--NIVEL DE INGLES HABLADO-->
                                             <p>Nivel Ingles Hablado</p>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="hablaB" id="hablaB">
+                                                <input class="form-check-input" type="radio" name="InglesHablado" id="hablaB">
                                                 <label class="form-check-label" for="hablaB">
                                                     Basico 
                                                 </label>
                                             </div>                                
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="hablaI" id="hablaI">
+                                                <input class="form-check-input" type="radio" name="InglesHablado" id="hablaI">
                                                 <label class="form-check-label" for="hablaI">
                                                     Intermedio
                                                 </label>
                                             </div>                                
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="hablaA" id="hablaA">
+                                                <input class="form-check-input" type="radio" name="InglesHablado" id="hablaA">
                                                 <label class="form-check-label" for="hablaA">
                                                     Avanzado
                                                 </label>
@@ -184,7 +184,7 @@ $obj = new AbmPostulante();
                     </div>
                 <div class="col-sm-12 col-md-6 mb-3 mt-3">
                     <label  class="form-label" for="letra">Seleccione una Tipografia: </label>
-                    <select class="form-select" aria-label="Default select example" name="letra" id="letra">
+                    <select class="form-select" aria-label="Default select example" name="Letra" id="letra">
                         <option value="" selected>letra 1</option>
                         <option value="">letra 2</option>
                         <option value="">letra 3</option>
