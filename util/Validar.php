@@ -228,12 +228,12 @@ class Validar{
 
 }// fin Clase Validar
 
-
+/** 
 $obj=new Validar();
 $nombre='';
 $r=$obj->validaLetra($nombre);
 var_dump($r);
-
+*/
 
 
 

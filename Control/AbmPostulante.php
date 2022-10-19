@@ -2,6 +2,39 @@
 // CLASE CONTROL 
 class AbmPostulante{
 
+    /**
+     * METODO AMB 
+     * DIRRECCIONA SEGUN LA ACCION QUE SE PASA POR 
+     * PARAMETRO A LOS METODOS ALTA-BAJA-MODIFICACION
+     * @param datos array
+     * @return boolean
+     */
+    public function amb($datos){
+        $salida=false;
+        if($datos['accion']=='editar'){
+            if($this->modificacion($datos)){
+                $salida=true;
+            }// fin if 
+        }// fin if
+
+        if($datos['accion']=='borrar'){
+            if($this->baja($datos)){
+                $salida=true;
+            }// fin if 
+        }// fin if
+
+        if($datos['accion']=='nuevo'){
+            if($this->alta($datos)){
+                $salida=true;
+            }// fin if 
+        }// fin if
+
+        return $salida; 
+
+
+    }// fin metodo amb
+
+
     /**CARGA OBJETO
      * CON LOS PARAMETROS ENVIADOS, CONSTRUYE EL OBJ Y SETEA SUS DATOS 
      * PARA POSTERIORMENTE RELIZAR LAS ACCIONES DE ALTA / MODIFICACION  Y BAJA
@@ -51,21 +84,20 @@ class AbmPostulante{
      * @param array datos
      * @return object
      */
-    /** 
+    
     private function cargarObjetoConClave($datos){
         $obj=null;
         if(isset($datos['Dni'])){
             $obj=new Postulante();
-            $obj->setear($arrayDatos['Nombre'],$arrayDatos['Apellido'],$arrayDatos['Dni'],$arrayDatos['FechaNacimiento'],$arrayDatos['Mail'],
-            $arrayDatos['Telefono'],$arrayDatos['Imagen'],$arrayDatos['Estudios'],$arrayDatos['Titulo'],$arrayDatos['Experiencia'],
-            $arrayDatos['inglesEscrito'],$arrayDatos['inglesHablado'],$arrayDatos['link'],$arrayDatos['color'],$arrayDatos['Letra']);
+            $obj->setear(null,null,$datos['Dni'],null,null,null,null,null,null,null,
+            null,null,null,null,null);
 
         }// fin if 
 
         return $obj; 
 
     }// fin function cargarObjetoConClave
-    */
+    
 
 
     /**METODO ALTA
@@ -88,26 +120,17 @@ class AbmPostulante{
 
     /**
      * METODO BAJA POSTULANTE
-     * @param ID 
+     * @param datos array
      * @return boolean
      */
-    public function baja($ID){
+    public function baja($datos){
         $salida=false;
-        $objPostulante=new Postulante();
-        $objPostulante->setDni($ID); // setea el dni del postulante (primary key)
-        var_dump($objPostulante->getDni());
-        $respuesta=$objPostulante->buscar();// buscar en la BD con el dni y se autollena en caso que lo encuentra
-        //var_dump($respuesta);
-        var_dump($objPostulante->getDni());
-        if($respuesta){ 
-            // encuentra el registro
-            
-            $resp=$objPostulante->eliminar();
-            
-            if($resp){
-                $salida=true; 
+        if($this->seteadoCamposClaves($datos)){   
+            $objPostulante=$this->cargarObjetoConClave($datos);
+            if($objPostulante!=null && $objPostulante->eliminar()){
+                $salida=true;
 
-            } // fin if 
+            }// fin if 
 
         }// fin if 
 
@@ -138,24 +161,62 @@ class AbmPostulante{
      * DEVUELVE EL OBJ EN CASO QUE 
      * SE ENCUENTRE EN LA BD
      *  O TODOS LOS REGISTROS DE LA BD
-     * @param id
-     * @return mixed
+     * @param array $datos
+     * @return array
      */
-    public function buscar($id){
-        $obj=new Postulante();
-        $arrayObj=null;
-        if($id!=null){
-            $obj->setDni($id);
-            $r=$obj->buscar(); 
-            if($r){
-                $arrayObj=$obj; // guarda en arrayObj el obj buscado
+    public function buscar($datos){
+        $where=" true ";
+        if($datos<>null){ // va preguntando que parametros estan seteados. Esto se realiza para hacer una busqueda por cualquier 
+            //campo del postulante , no solo buscar por su ID
+            if(isset($datos['Nombre'])){
+                $where.=" and Nombre ='".$datos['Nombre']."'";
             }// fin if
-        } // fin if
-        else{
-            $arrayObj=$obj->listar(); 
-        }// fin else
+            if(isset($datos['Apellido'])){
+                $where.=" and Apellido ='".$datos['Apellido']."'";
+            }// fin if
+            if(isset($datos['Dni'])){
+                $where.=" and Dni =".$datos['Dni'];
+            }// fin if
+            if(isset($datos['Mail'])){
+                $where.=" and Mail ='".$datos['Mail']."'";
+            }// fin if
+            if(isset($datos['FechaNacimiento'])){
+                $where.=" and FechaNacimiento ='".$datos['FechaNacimiento']."'";
+            }// fin if
+            if(isset($datos['Telefono'])){
+                $where.=" and Telefono ='".$datos['Telefono']."'";
+            }// fin if
+            if(isset($datos['Imagen'])){
+                $where.=" and Imagen ='".$datos['Imagen']."'";
+            }// fin if
+            if(isset($datos['Estudios'])){
+                $where.=" and Estudios ='".$datos['Estudios']."'";
+            }// fin if
+            if(isset($datos['Experiencia'])){
+                $where.=" and Experiencia ='".$datos['Experiencia']."'";
+            }// fin if
+            if(isset($datos['Titulo'])){
+                $where.=" and Titulo ='".$datos['Titulo']."'";
+            }// fin if
+            if(isset($datos['InglesEscrito'])){
+                $where.=" and InglesEscrito ='".$datos['InglesEscrito']."'";
+            }// fin if
+            if(isset($datos['InglesHablado'])){
+                $where.=" and InglesHablado ='".$datos['InglesHablado']."'";
+            }// fin if
+            if(isset($datos['link'])){
+                $where.=" and link ='".$datos['link']."'";
+            }// fin if
+            if(isset($datos['Letra'])){
+                $where.=" and Letra ='".$datos['Letra']."'";
+            }// fin if
+        
+        }// fin if
+        $obj=new Postulante(); 
+        $arreglo=$obj->listar($where);
 
-        return $arrayObj;
+        return $arreglo;
+
 
     }// fin function buscar
 

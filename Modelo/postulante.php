@@ -209,7 +209,7 @@ class Postulante extends BaseDatos{
     /** METODO BUSCAR: EN FUNCION DEL ID (DNI), BUSCAR A LA PERSONA EN LA BASE DE DATOS
      * @return boolean
      */
-    public function buscar(){
+    public function cargar(){
         $salida=false; // inicializacion del valor de retorno
         $sql = "SELECT * FROM postulante WHERE dni=".$this->getDni();
         if($this->Iniciar()){// inicializa la conexion
@@ -328,30 +328,34 @@ class Postulante extends BaseDatos{
     /**
      * METODO LISTAR POSTULANTE
      * DEVUELVE TODOS LOS POSTULANTES EN LA BASE DE DATOS
+     * @param parametro
      * @return array 
      */
-    public function listar(){
+    public function listar($parametro=""){
         $arrayPostulantes=array();
         $sql="SELECT * FROM postulante";
-        $respuesta=$this->Ejecutar($sql);
-        if($respuesta>-1){
-            if($respuesta>0){
+        if($parametro!=""){
+            $sql.='WHERE'.$parametro;
+        }// fin if 
+
+        if($this->Iniciar()){
+            $respuesta=$this->Ejecutar($sql);
+            if($respuesta>-1){
+                if($respuesta>0){
                 // creo un obj nuevo de postulante ? o lo hago directo con this?
-                while($row=$this->Registro()){
+                    while($row=$this->Registro()){
                     $obj=new Postulante();
                     $obj->setear($row['Nombre'],$row['Apellido'],$row['Dni'],$row['FechaNacimiento'],$row['Mail'],$row['Telefono'],$row['Imagen'],
                     $row['Estudios'],$row['Titulo'],$row['Experiencia'],$row['InglesEscrito'],$row['InglesHablado'],$row['link'],$row['color'],$row['Letra']);
                     array_push($arrayPostulantes,$obj);   // opcion con this. Sino creo un obj y lo reemplazo por el this
-                }// fin while 
+                    }// fin while 
 
 
+                }// fin if 
             }// fin if 
         }// fin if 
         return $arrayPostulantes; 
     }// fin function listar
-
-
-
 
 }// fin de la clase 
 ?>
