@@ -6,7 +6,6 @@ include_once '../Estructura/head.php';
 $datos=data_submitted();
 $obj = new AbmPostulante();
 
-
 ?>
 
 <main class="contaier mb-3">
@@ -14,7 +13,7 @@ $obj = new AbmPostulante();
     <h6 class="text-center">Cargue los datos del formulario para completar su curriculum digital</h6>
 </div>
 <div class="container card shadow"> 
-    <form method="post" action="../accion/accionCargaCV.php">
+    <form method="post" action="../accion/accionValidaForm.php">
         <!--DATOS PERSONALES -->
         <div class="container border-bottom border-1 mt-2 pb-4 p-2">
             <h5 class="fw-bold">Datos Personales</h5>
@@ -22,22 +21,66 @@ $obj = new AbmPostulante();
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--NOMBRE-->
                         <label for="nombre" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Nombre">
+                    <input type="text" class="form-control <?php if (isset($datos['msgNombre'])) echo ( $datos['msgNombre'] !=null) ? "is-invalid" : "is-valid"; ?>" id="Nombre" name="Nombre" placeholder="Nombre">
+                        <?php 
+                            if (isset($datos['msgNombre'])) 
+                                if( $datos['msgNombre'] !=null){ 
+                                    echo '<div id="validationServer03Feedback" class="invalid-feedback">';
+                                    foreach($datos['msgNombre'] as $msg) {
+                                        echo $msg." ";
+                                    };
+                                    echo '</div>';
+                                    } 
+                        ?>
                     </div>
+
+
+
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--APELLIDO-->
                         <label for="apellido" class="form-label">Apellido:</label>
-                        <input type="text" class="form-control" id="Apellido" name="Apellido" placeholder="Apellido">
+                        <input type="text" class="form-control <?php if (isset($datos['msgApellido'])) echo ( $datos['msgApellido'] !=null) ? "is-invalid" : "is-valid"; ?>" id="Apellido" name="Apellido" placeholder="Apellido">
+                        <?php 
+                            if (isset($datos['msgApellido'])) 
+                                if( $datos['msgApellido'] !=null){ 
+                                    echo '<div id="validationServer03Feedback" class="invalid-feedback">';
+                                    foreach($datos['msgApellido'] as $msg) {
+                                        echo $msg." ";
+                                    };
+                                    echo '</div>';
+                                    } 
+                        ?>
+
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--FECHA NACIMIENTO-->
                         <label for="fechaNacimiento" class="form-label">Fecha Nacimiento:</label>
-                        <input type="text" class="form-control" id="FechaNacimiento" name="FechaNacimiento">
+                        <input type="text" class="form-control <?php if (isset($datos['msgNacimiento'])) echo ( $datos['msgNacimiento'] !=null) ? "is-invalid" : "is-valid"; ?>" id="FechaNacimiento" name="FechaNacimiento">
+                        <?php 
+                            if (isset($datos['msgNacimiento'])) 
+                                if( $datos['msgNacimiento'] !=null){ 
+                                    echo '<div id="validationServer03Feedback" class="invalid-feedback">';
+                                    foreach($datos['msgNacimiento'] as $msg) {
+                                        echo $msg." ";
+                                    };
+                                    echo '</div>';
+                                    } 
+                        ?>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--DNI-->
                         <label for="dni" class="form-label">DNI:</label>
-                        <input type="number" class="form-control" id="Dni" name="Dni" placeholder="33000111">
+                        <input type="number" class="form-control <?php if (isset($datos['msgDni'])) echo ( $datos['msgDni'] !=null) ? "is-invalid" : "is-valid"; ?>" id="Dni" name="Dni" placeholder="33000111">
+                        <?php 
+                            if (isset($datos['msgDni'])) 
+                                if( $datos['msgDni'] !=null){ 
+                                    echo '<div id="validationServer03Feedback" class="invalid-feedback">';
+                                    foreach($datos['msgDni'] as $msg) {
+                                        echo $msg." ";
+                                    };
+                                    echo '</div>';
+                                    } 
+                        ?>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--EMAIL-->
@@ -193,7 +236,7 @@ $obj = new AbmPostulante();
                 </div>
             </div> <!--fin row-->
         </div> <!--FIN DE CONTAINER DE ESTILOS DE CV-->
-        <input type="submit" class="btn btn-primary m-3 float-end" value="Cargar">
+        <input type="submit" class="btn btn-primary m-3 float-end" value="<?php echo ($datos['accion'] !=null) ? $datos['accion'] : "nose" ?>">
         <a class="btn btn-primary mb-3 mt-3 float-end" role="button" href="index.php">Volver</a>
     </form>
 
