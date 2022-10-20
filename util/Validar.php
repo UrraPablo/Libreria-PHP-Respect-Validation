@@ -1,6 +1,7 @@
 <?php
 
 // CLASE VALIDAR 
+
 include_once $GLOBALS['ROOT'].'/libs/vendor/autoload.php'; 
 use Respect\Validation\Validator as v; 
 use Respect\Validation\Exceptions\NestedValidationException;
@@ -16,14 +17,12 @@ class Validar{
         $salida=null; 
 
         $userNameValidator=v::alpha(' ')->notEmpty()->length(null,15);
-       // $userNameValidator->validate($texto);// valida que no este vacio, que contenga solo letras y con una longitud na mayor a 15
+       //
         try{
             $userNameValidator->assert($texto); 
 
         }// fin try
         catch(NestedValidationException $ex){
-                    // For all messages, the {{name}} variable is available for templates.
-                    // If you do not define a name it uses the input to replace this placeholder.
             $salida=$ex->getMessages(['alpha'=>'{{name}} Debe contener solo letras',
         'notEmpty'=>'{{name}} No puede estar vacio',
         'length'=>'{{name}} No puede superar los 15 caracteres']); 
@@ -39,22 +38,20 @@ class Validar{
      */
     public function validaFecha($texto){
         $salida=null; 
-
-        $userNameValidator=v::date('d/m/Y')->notEmpty()->MinAge(15)->MaxAge(100);
-       // v::date()->validate('2017-12-31'); // true
+        $anio=substr($texto,5);
+        $userNameValidator=v::date('j/m/Y')->notEmpty()->length(null,10);
+        $validaAnio=v::date('Y')->between(1900,2022);
         try{
+            $validaAnio->assert($anio);
             $userNameValidator->assert($texto); 
 
         }// fin try
         catch(NestedValidationException $ex){
                     // For all messages, the {{name}} variable is available for templates.
                     // If you do not define a name it uses the input to replace this placeholder.
-            $salida=$ex->getMessages([
-            'notEmpty'=>'{{name}} No puede estar vacio',
-            'minAge'=>'{{name}} No puede ser menor a 15 años',
-            'maxAge'=>'{{name}} No puede superar los 100 años',
-            'date'=>'Debe ingresar la fecha segun el formato definido (dd/mm/aaaa)'
-            ]); 
+            $salida=$ex->getMessages(['notEmpty'=>'{{name}} No puede estar vacio',
+            'date'=>'Debe ser un formato valido de fecha',
+            'between'=>'El año deb estar entre 1900 y 2022']); 
 
         }// fin catch
 
@@ -69,22 +66,18 @@ class Validar{
     public function validaDni($dni){
         // noWhitespace()
         $salida=null;
-        $userNameValidator=v::IntVal()->noWhitespace()->notEmpty()->length(7,8)->min(7000000)->max(55000000);
+        $userNameValidator=v::IntType()->noWhitespace()->notEmpty()->length(8,8);
         //$userNameValidator->validate($dni); // valida que el dni sea de tipo entero y que tenga 8 digitos 
         try{
             $userNameValidator->assert($dni);
         }// fin try
         catch(NestedValidationException $ex){
-            $salida=$ex->getMessages(['intVal'=>'{{name}} El dni debe ser un valor entero positivo',
+            $salida=$ex->getMessages(['intType'=>'{{name}} El dni debe ser un valor entero positivo',
         'noWhitespace'=>'{{name}} No puede tener espacios en blanco',
         'notEmpty'=>'{{name}} No puede estar vacio',
-        'length'=>'{{name}} Debe tener 7 u 8 digitos',
-        'min'=>'{{name}} El dni no puede ser menor a 7.000.000',
-        'max'=>'{{name}} El dni no puede ser mayor a 8.000.000'
-        ]); // noWhitespace().' '.$notEmpty.' '.$length
-
+        'length'=>'{{name}} Debe tener exactamente 8 digitos']);
         }// fin catch
-         
+
         return $salida; 
 
     }// fin function validaDni
@@ -96,19 +89,16 @@ class Validar{
     */
     public function validaTelefono($telefono){
         $salida=null; 
-        $userNameValidator=v::alnum('+',' ')->noWhitespace()->notEmpty()->length(13,15)->StartsWith('+54');
-        //$userNameValidator=v::StartsWith('+54');//->validate($telefono); // valida que comience con la caracteristica de 
-        // argentina , no que esta vacio y sin espacios en blanco. de longitu entre 13 y 15
-        //Si pongo un numero (int) sale un error de codigo que no puedo manejar
+        $userNameValidator=v::digit('+')->noWhitespace()->notEmpty()->length(13,15)->startsWith('+54');
         try{
             $userNameValidator->assert($telefono);
         }// fin try 
         catch(NestedValidationException $ex){
-            $salida=$ex->getMessages(['alnum'=>'El telefono debe tener solo el caracter "+" y numeros',
-            'noWhitespace'=>'No debe contener espacios en blanco',
-            'length'=>'La cantidad de digitos debe estar entre 13 y 15, considerando el "+"',
-            'startsWith'=>'El número debe empezar con "+54"',
-            'notEmpty'=>'El teléfono no debe estar vacío']);
+            $salida=$ex->getMessages(['digit'=>'{{name}} El telefono debe tener solo el caracter +',
+            'noWhitespace'=>'{{name}} No debe contener espacios en blanco',
+            'length'=>'{{name}} La cantidad de digitos debe estar entre 13 y 15, considerando el +',
+            'startsWith'=>' El numero debe empezar con +54',
+            'notEmpty'=>'{{name}} El telefono no debe estar vacio']);
         
 
 
@@ -336,9 +326,5 @@ class Validar{
 
 }// fin Clase Validar
 
-$fecha=new Validar();
-$d=12/4/2021;
-$r=$fecha->validaFecha($d);
 
-//var_dump($r);
 ?>
