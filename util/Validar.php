@@ -40,8 +40,8 @@ class Validar{
     public function validaFecha($texto){
         $salida=null; 
 
-        $userNameValidator=v::alpha(' ')->notEmpty()->length(null,15);
-       // $userNameValidator->validate($texto);// valida que no este vacio, que contenga solo letras y con una longitud na mayor a 15
+        $userNameValidator=v::date('d/m/y')->notEmpty()->length(null,10);
+       // v::date()->validate('2017-12-31'); // true
         try{
             $userNameValidator->assert($texto); 
 
@@ -329,4 +329,9 @@ class Validar{
 
 }// fin Clase Validar
 
+$fecha=new Validar();
+$d=12/4/2021;
+$r=$fecha->validaFecha($d);
+
+var_dump($r);
 ?>

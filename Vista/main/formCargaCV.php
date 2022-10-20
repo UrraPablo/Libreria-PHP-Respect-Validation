@@ -4,8 +4,17 @@ include_once '../../configuracion.php';
 include_once '../Estructura/head.php'; 
 
 $datos=data_submitted();
-$obj = new AbmPostulante();
+$objPostulante = new AbmPostulante();
 var_dump($datos);
+// LLAMADO AL OBJ QUE CONTIENE LOS ATRIBUTOS DEL POSTULANTE
+$obj=null;
+if(isset($datos['Dni']) && $datos['Dni']<>0){
+    $listaObj=$objPostulante->buscar($datos['Dni']); // cambio de id por Dni para que recupere el obj con el dni dado por parametro 
+    
+    //var_dump($listaObj);
+}// fin if 
+
+//var_dump($datos['Dni']);
 
 ?>
 
@@ -22,7 +31,7 @@ var_dump($datos);
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--NOMBRE-->
                         <label for="nombre" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control <?php if (isset($datos['msgNombre'])) echo ( $datos['msgNombre'] !='ok') ? "is-invalid" : "is-valid"; ?>" id="Nombre" name="Nombre" placeholder="Nombre" value="<?php echo $datos['Nombre'] ?>" >
+                    <input type="text" class="form-control <?php if (isset($datos['msgNombre'])) echo ( $datos['msgNombre'] !='ok') ? "is-invalid" : "is-valid"; ?>" id="Nombre" name="Nombre" placeholder="Nombre" value="<?php echo($obj!=null)? $obj->getNombre():"" ?>" >
                         <?php 
                             if (isset($datos['msgNombre'])) echo ($datos['msgNombre'] !='ok') ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgNombre'].'</div>' : '';
                         ?>
@@ -49,7 +58,7 @@ var_dump($datos);
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--FECHA NACIMIENTO-->
                         <label for="fechaNacimiento" class="form-label">Fecha Nacimiento:</label>
-                        <input type="text" class="form-control <?php if (isset($datos['msgNacimiento'])) echo ( $datos['msgNacimiento'] !=null) ? "is-invalid" : "is-valid"; ?>" id="FechaNacimiento" name="FechaNacimiento">
+                        <input type="date" class="form-control <?php if (isset($datos['msgNacimiento'])) echo ( $datos['msgNacimiento'] !=null) ? "is-invalid" : "is-valid"; ?>" id="FechaNacimiento" name="FechaNacimiento">
                         <?php 
                             if (isset($datos['msgNacimiento'])) 
                                 if( $datos['msgNacimiento'] !=null){ 

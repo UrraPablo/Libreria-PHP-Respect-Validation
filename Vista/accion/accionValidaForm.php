@@ -4,22 +4,27 @@ include_once '../Estructura/head.php';
 
 $datos=data_submitted();
 $valido=false;
+// correccion 
+$objValidar=new Validar();
 
-$validar['Nombre']=Validar::validaNyA($datos['Nombre']);
-$validar['Apellido']=Validar::validaNyA($datos['Apellido']);
-$validar['Nacimiento']=Validar::validaFecha($datos['FechaNacimiento']);
-$validar['Dni']=Validar::validaDni($datos['Dni']);
-$validar['Email']=Validar::validaMail($datos['Mail']);
-$validar['Telefono']=Validar::validaTelefono($datos['Telefono']);
-$validar['Link']=Validar::validaLink($datos['link']);
-$validar['Imagen']=Validar::validaImagen($datos['Imagen']);
-$validar['Estudios']=Validar::validaEstudios($datos['Estudios']);
-$validar['Titulo']=Validar::validaTitulo($datos['Titulo']);
-$validar['Experiencia']=Validar::validaExperiencia($datos['Experiencia']);
-$validar['InglesHablado']=Validar::validaIngles($datos['InglesHablado']);
-$validar['InglesEscrito']=Validar::validaIngles($datos['InglesEscrito']);
 
-if ($validar ['Nombre'] && $validar ['Apellido'] && $validar ['Nacimiento'] && $validar ['Dni'] && $validar ['Email'] && $validar ['Telefono'] && $validar ['Link'] && $validar ['Imagen'] && $validar ['Estudios'] && $validar ['Titulo'] && $validar ['Experiencia'] && $validar ['InglesHablado'] && $validar ['InglesEscrito']){
+$validar['Nombre']=$objValidar->validaNyA($datos['Nombre']);
+$validar['Apellido']=$objValidar->validaNyA($datos['Apellido']);
+$validar['Nacimiento']=$objValidar->validaFecha($datos['FechaNacimiento']);
+$validar['Dni']=$objValidar->validaDni($datos['Dni']);
+$validar['Email']=$objValidar->validaMail($datos['Mail']);
+$validar['Telefono']=$objValidar->validaTelefono($datos['Telefono']);
+$validar['Link']=$objValidar->validaLink($datos['link']);
+$validar['Imagen']=$objValidar->validaImagen($datos['Imagen']);
+$validar['Estudios']=$objValidar->validaEstudios($datos['Estudios']);
+$validar['Titulo']=$objValidar->validaTitulo($datos['Titulo']);
+$validar['Experiencia']=$objValidar->validaExperiencia($datos['Experiencia']);
+$validar['InglesHablado']=$objValidar->validaIngles($datos['InglesHablado']);
+$validar['InglesEscrito']=$objValidar->validaIngles($datos['InglesEscrito']);
+
+if ($validar ['Nombre'] && $validar ['Apellido'] && $validar ['Nacimiento'] && $validar ['Dni'] && $validar ['Email'] && 
+  $validar ['Telefono'] && $validar ['Link'] && $validar ['Imagen'] && $validar ['Estudios'] && $validar ['Titulo'] && 
+  $validar ['Experiencia'] && $validar ['InglesHablado'] && $validar ['InglesEscrito']){
     $valido=true;
 }
 
@@ -27,7 +32,7 @@ if($valido){
     $obj = new AbmPostulante();
     $resp = false;
     if (isset($datos['accion'])){
-        $resp = $obj->abm($datos);
+        $resp = $obj->amb($datos);
         if($resp){
             $mensaje = "La accion ".$datos['accion']." se realizo correctamente.";
         }else {
