@@ -39,8 +39,10 @@ class Validar{
      */
     public function validaFecha($texto){
         $salida=null; 
-
-        $userNameValidator=v::date('d/m/Y')->notEmpty()->MinAge(15)->MaxAge(100);
+        //$edad=""substr($texto,6);
+        //var_dump($edad);
+        //$anioValidado=v::MinAge(15)->MaxAge(100);
+        $userNameValidator=v::date('d/m/Y')->notEmpty()->MinAge(15,'d/m/Y')->MaxAge(100,'d/m/Y');
        // v::date()->validate('2017-12-31'); // true
         try{
             $userNameValidator->assert($texto); 
@@ -96,7 +98,7 @@ class Validar{
     */
     public function validaTelefono($telefono){
         $salida=null; 
-        $userNameValidator=v::alnum('+',' ')->noWhitespace()->notEmpty()->length(13,15)->StartsWith('+54');
+        $userNameValidator=v::alnum('+',' ')->noWhitespace()->notEmpty()->length(9,15)->StartsWith('+54');
         //$userNameValidator=v::StartsWith('+54');//->validate($telefono); // valida que comience con la caracteristica de 
         // argentina , no que esta vacio y sin espacios en blanco. de longitu entre 13 y 15
         //Si pongo un numero (int) sale un error de codigo que no puedo manejar
@@ -125,7 +127,7 @@ class Validar{
     public function validaIngles($texto){
         $salida=null; 
         $texto=strtolower($texto);
-        $userNameValidator=v::anyOf(v::identical('basico'),v::identical('intermedio'),v::identical('avanzado'))->alpha()->notEmpty();
+        $userNameValidator=v::anyOf(v::identical('on'),v::identical('intermedio'),v::identical('avanzado'))->alpha()->notEmpty();
         // v::anyOf(v::intVal(), v::floatVal())->validate(15.5); // true  {{compareTo}}-> identical
         // con anyOf   el mensaje aparece la ultima condicion dentro , avanzado.
         try{
@@ -216,7 +218,7 @@ class Validar{
     public function validaEstudios($texto){
         $salida=null; 
         $texto=strtolower($texto);
-        $userNameValidator=v::anyOf(v::identical('Terciario'),v::identical('Secundario'),v::identical('Universitario'))->alpha()->notEmpty();
+        $userNameValidator=v::anyOf(v::identical('terciario'),v::identical('secundario'),v::identical('on'))->alpha()->notEmpty();
         // v::anyOf(v::intVal(), v::floatVal())->validate(15.5); // true  {{compareTo}}-> identical
         // con anyOf   el mensaje aparece la ultima condicion dentro , avanzado.
         try{

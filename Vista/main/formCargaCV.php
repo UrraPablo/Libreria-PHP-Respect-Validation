@@ -233,7 +233,7 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                                         <label class="form-check-label" for="Terciario">Terciario</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Estudios" id="Universitario">
+                                        <input class="form-check-input" type="radio" name="Estudios" id="Universitario" value="universitario">
                                         <label class="form-check-label" for="Universitario">Universitario</label>
                                     </div>
                                     <!--TITULO-->

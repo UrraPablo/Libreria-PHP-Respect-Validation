@@ -29,13 +29,15 @@ $validar['Experiencia']=$objValidar->validaExperiencia($datos['Experiencia']);
 $validar['InglesHablado']=$objValidar->validaIngles($datos['InglesHablado']);
 $validar['InglesEscrito']=$objValidar->validaIngles($datos['InglesEscrito']);
 
-if ($validar ['Nombre'] == null && $validar ['Apellido'] == null &&   $validar ['Dni'] == null && $validar ['FechaNacimiento'] == null && $validar ['Mail'] == null && $validar ['Telefono'] == null && $validar ['link'] == null && $validar ['urlImagen'] == null && $validar ['Titulos'] == null && $validar ['Estudios'] == null && $validar ['Experiencia'] == null && $validar ['InglesHablado'] == null && $validar ['InglesEscrito'] == null){
+if ($validar ['Nombre'] == null && $validar ['Apellido'] == null &&   $validar ['Dni'] == null && $validar ['FechaNacimiento'] == null && $validar ['Mail'] == null && $validar ['Telefono'] == null && $validar ['link'] == null && $validar ['Imagen'] == null && $validar ['Titulo'] == null && $validar ['Estudios'] == null && $validar ['Experiencia'] == null && $validar ['InglesHablado'] == null && $validar ['InglesEscrito'] == null){
     $valido=true;
 }
+var_dump($validar);
 
 if($valido){
     $obj = new AbmPostulante();
     $resp = false;
+
     if (isset($datos['accion'])){
         $resp = $obj->amb($datos);
         if($resp){
@@ -70,7 +72,7 @@ if($valido){
   ?>
   </form>
   <script>
-  document.forms["myform"].submit();
+  document.forms[""].submit();
   </script>
   <?php
 

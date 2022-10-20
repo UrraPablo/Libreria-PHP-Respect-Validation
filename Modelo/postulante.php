@@ -277,7 +277,7 @@ class Postulante extends BaseDatos{
         $salida=false;
         $sql="UPDATE postulante SET Nombre='".$this->getNombre()."', Apellido='".$this->getApellido()."', FechaNacimiento=".$this->getFechaNacimiento().", Mail='".$this->getMail()."',Telefono=".$this->getTelefono().", Imagen='".$this->getImagen()."', Estudios='".$this->getEstudios()."', Titulo='".$this->getTitulo()."', 
         Experiencia='".$this->getExperiencia()."', InglesEscrito='".$this->getInglesEscrito()."', InglesHablado='".$this->getInglesHablado()."', link='".$this->getLink()."', color='".$this->getColor()."', letra='".$this->getLetra()."'
-         WHERE Id=".$this->getDni();
+         WHERE Dni=".$this->getDni();
         if($this->Iniciar()){
             if($this->Ejecutar($sql)){
                 $salida=true;
