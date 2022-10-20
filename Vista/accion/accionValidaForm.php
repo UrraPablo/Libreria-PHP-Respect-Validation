@@ -32,7 +32,7 @@ $validar['InglesEscrito']=$objValidar->validaIngles($datos['InglesEscrito']);
 if ($validar ['Nombre'] == null && $validar ['Apellido'] == null &&   $validar ['Dni'] == null && $validar ['FechaNacimiento'] == null && $validar ['Mail'] == null && $validar ['Telefono'] == null && $validar ['link'] == null && $validar ['Imagen'] == null && $validar ['Titulo'] == null && $validar ['Estudios'] == null && $validar ['Experiencia'] == null && $validar ['InglesHablado'] == null && $validar ['InglesEscrito'] == null){
     $valido=true;
 }
-var_dump($validar);
+//var_dump($validar);
 
 if($valido){
     $obj = new AbmPostulante();
@@ -72,7 +72,7 @@ if($valido){
   ?>
   </form>
   <script>
-  document.forms[""].submit();
+  document.forms["myform"].submit();
   </script>
   <?php
 
