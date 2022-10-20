@@ -14,8 +14,10 @@
     <!--HEDAER -->
     <header class="container-fluid bg-light p-3 shadow">
         <h1 class="text-center text-primary">
-            CV creator 
-        </h1>
+            <a class= "text-decoration-none text-reset" href="../">
+                CV creator 
+            </a>
+        </h1>    
     </header>    
 
     

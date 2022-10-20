@@ -44,14 +44,7 @@ if(isset($datos['Dni']) && $datos['Dni']<>0){
                         <label for="apellido" class="form-label">Apellido:</label>
                         <input type="text" class="form-control <?php if (isset($datos['msgApellido'])) echo ( $datos['msgApellido'] !=null) ? "is-invalid" : "is-valid"; ?>" id="Apellido" name="Apellido" placeholder="Apellido">
                         <?php 
-                            if (isset($datos['msgApellido'])) 
-                                if( $datos['msgApellido'] !=null){ 
-                                    echo '<div id="validationServer03Feedback" class="invalid-feedback">';
-                                    foreach($datos['msgApellido'] as $msg) {
-                                        echo $msg." ";
-                                    };
-                                    echo '</div>';
-                                    } 
+                            if (isset($datos['msgApellido'])) echo ($datos['msgApellido'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgApellido'].'</div>' : '';
                         ?>
 
                     </div>
@@ -60,14 +53,7 @@ if(isset($datos['Dni']) && $datos['Dni']<>0){
                         <label for="fechaNacimiento" class="form-label">Fecha Nacimiento:</label>
                         <input type="date" class="form-control <?php if (isset($datos['msgNacimiento'])) echo ( $datos['msgNacimiento'] !=null) ? "is-invalid" : "is-valid"; ?>" id="FechaNacimiento" name="FechaNacimiento">
                         <?php 
-                            if (isset($datos['msgNacimiento'])) 
-                                if( $datos['msgNacimiento'] !=null){ 
-                                    echo '<div id="validationServer03Feedback" class="invalid-feedback">';
-                                    foreach($datos['msgNacimiento'] as $msg) {
-                                        echo $msg." ";
-                                    };
-                                    echo '</div>';
-                                    } 
+                            if (isset($datos['msgNacimiento'])) echo ($datos['msgNacimiento'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgNacimiento'].'</div>' : '';
                         ?>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
@@ -75,35 +61,40 @@ if(isset($datos['Dni']) && $datos['Dni']<>0){
                         <label for="dni" class="form-label">DNI:</label>
                         <input type="number" class="form-control <?php if (isset($datos['msgDni'])) echo ( $datos['msgDni'] !=null) ? "is-invalid" : "is-valid"; ?>" id="Dni" name="Dni" placeholder="33000111">
                         <?php 
-                            if (isset($datos['msgDni'])) 
-                                if( $datos['msgDni'] !=null){ 
-                                    echo '<div id="validationServer03Feedback" class="invalid-feedback">';
-                                    foreach($datos['msgDni'] as $msg) {
-                                        echo $msg." ";
-                                    };
-                                    echo '</div>';
-                                    } 
+                            if (isset($datos['msgDni'])) echo ($datos['msgDni'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgDni'].'</div>' : '';
                         ?>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--EMAIL-->
                         <label for="name" class="form-label">Email:</label>
-                        <input type="text" class="form-control" id="Mail" name="Mail" placeholder="ejemplo@gmail.com">
+                        <input type="text" class="form-control <?php if (isset($datos['msgMail'])) echo ( $datos['msgMail'] !='ok') ? "is-invalid" : "is-valid"; ?>" value="<?php echo($obj!=null)? $obj->getMail():"" ?> " id="Mail" name="Mail" placeholder="ejemplo@gmail.com">
+                        <?php 
+                            if (isset($datos['msgMail'])) echo ($datos['msgMail'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgMail'].'</div>' : '';
+                        ?>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--TELEFONO-->
                         <label for="telefono" class="form-label">Telefono:</label>
-                        <input type="text" class="form-control" id="Telefono" name="Telefono" placeholder="299-4111444">
+                        <input type="text"  id="Telefono" name="Telefono" placeholder="299-4111444" class="form-control <?php if (isset($datos['msgTelefono'])) echo ( $datos['msgTelefono'] !='ok') ? "is-invalid" : "is-valid"; ?>" value="<?php echo($obj!=null)? $obj->getTelefono():"" ?>">
+                        <?php 
+                            if (isset($datos['msgTelefono'])) echo ($datos['msgTelefono'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgTelefono'].'</div>' : '';
+                        ?>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <label for="link" class="form-label">Ingrese su Link de Linkdin o Github</label>
-                        <input type="text" class="form-control" id="link" name="link">
+                        <input type="text" id="link" name="link" placeholder="https://www.linkedin.com/in/usuario/" class="form-control <?php if (isset($datos['msgLink'])) echo ( $datos['msgLink'] !='ok') ? "is-invalid" : "is-valid"; ?>" value="<?php echo($obj!=null)? $obj->getLink():"" ?>">
+                        <?php 
+                            if (isset($datos['msgLink'])) echo ($datos['msgLink'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgLink'].'</div>' : '';
+                        ?>
                     </div>
                     <!--FIN DIV DE LINK DE GITHUB O LINKEDIN-->
                     <!--carga de la imagen-->
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <label for="imagen" class="form-label">Imagen de Perfil</label>
-                        <input type="file" class="form-control" id="Imagen" name="Imagen">
+                        <input type="file" id="Imagen" name="Imagen" class="form-control <?php if (isset($datos['msgImagen'])) echo ( $datos['msgImagen'] !='ok') ? "is-invalid" : "is-valid"; ?>" value="<?php echo($obj!=null)? $obj->getImagen():"" ?>">
+                        <?php 
+                            if (isset($datos['msgImagen'])) echo ($datos['msgImagen'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgImagen'].'</div>' : '';
+                        ?>
                     </div>            
             </div>
         </div>
@@ -228,6 +219,9 @@ if(isset($datos['Dni']) && $datos['Dni']<>0){
                 <div class="col-sm-12 col-md-6 mb-3 mt-3">
                     <label  class="form-label" for="color">Seleccione un color: </label>
                     <input type="color" class="form-control form-control-color"  name="color" id="color" value="#563d7c">
+                    <?php 
+                            if (isset($datos['msgColor'])) echo ($datos['msgColor'] !='ok') ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgColor'].'</div>' : '';
+                    ?>
                     </div>
                 <div class="col-sm-12 col-md-6 mb-3 mt-3">
                     <label  class="form-label" for="letra">Seleccione una Tipografia: </label>
