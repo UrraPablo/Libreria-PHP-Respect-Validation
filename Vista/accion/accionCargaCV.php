@@ -8,12 +8,6 @@ $resp = false;
 
 if (isset($datos['accion'])){
 
-  
-
-
-
-
-
 
     $resp = $objTrans->abm($datos);
     if($resp){

@@ -8,7 +8,8 @@
 ### Instalación:
 Para poder ejecutar este proyecto es necesario instalar previamente composer ([Descargar Composer](https://getcomposer.org/download/))
 Composer es un gestor de dependencias de PHP.
-Una vez descargado e instalado se debe abrir el terminal y posicionarse en la carpeta raíz del proyecto. Luego ejecutar
+Una vez descargado e instalado se debe abrir el terminal y posicionarse en la carpeta raíz del proyecto. Luego ejecutar:
+
 
 
 

@@ -43,7 +43,7 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--APELLIDO-->
                         <label for="apellido" class="form-label">Apellido:</label>
-                        <input type="text" class="form-control <?php if (isset($datos['msgApellido'])) echo ( $datos['msgApellido'] !=null) ? "is-invalid" : "is-valid"; ?>" id="Apellido" name="Apellido" placeholder="Apellido">
+                        <input type="text" class="form-control <?php if (isset($datos['msgApellido'])) echo ( $datos['msgApellido'] !=null) ? "is-invalid" : "is-valid"; ?>" id="Apellido" name="Apellido" placeholder="Apellido" value="<?php echo($obj!=null)? $obj->getApellido():"" ?>">
                         <?php 
                             if (isset($datos['msgApellido'])) echo ($datos['msgApellido'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgApellido'].'</div>' : '';
                         ?>
