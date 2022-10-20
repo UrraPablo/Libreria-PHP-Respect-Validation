@@ -33,6 +33,7 @@ if($valido){
     $resp = false;
     if (isset($datos['accion'])){
         $resp = $obj->amb($datos);
+        //echo($resp);
         if($resp){
             $mensaje = "La accion ".$datos['accion']." se realizo correctamente.";
         }else {
