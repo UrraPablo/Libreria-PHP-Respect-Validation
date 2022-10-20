@@ -5,16 +5,17 @@ include_once '../Estructura/head.php';
 
 $datos=data_submitted();
 $objPostulante = new AbmPostulante();
-var_dump($datos);
+//var_dump($datos);
 // LLAMADO AL OBJ QUE CONTIENE LOS ATRIBUTOS DEL POSTULANTE
-$obj=null;
-if(isset($datos['Dni']) && $datos['Dni']<>0){
-    $listaObj=$objPostulante->buscar($datos['Dni']); // cambio de id por Dni para que recupere el obj con el dni dado por parametro 
-    
-    //var_dump($listaObj);
-}// fin if 
+$obj=NULL;
 
-//var_dump($datos['Dni']);
+if(isset($datos['Dni']) && $datos['Dni'] <> 0){
+    $objList=$objPostulante->buscar($datos); // cambio de id por Dni para que recupere el obj con el dni dado por parametro 
+    if(count($objList)==1){
+        $obj=$objList[0];
+    }// fin if
+}// fin if 
+//echo($obj->getNombre());
 
 ?>
 

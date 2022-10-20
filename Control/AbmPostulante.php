@@ -169,6 +169,7 @@ class AbmPostulante{
         $where=" true ";
         if($datos<>null){ // va preguntando que parametros estan seteados. Esto se realiza para hacer una busqueda por cualquier 
             //campo del postulante , no solo buscar por su ID
+            //echo("entro al datos <> null <br>");
             if(isset($datos['Nombre'])){
                 $where.=" and Nombre ='".$datos['Nombre']."'";
             }// fin if
@@ -176,7 +177,8 @@ class AbmPostulante{
                 $where.=" and Apellido ='".$datos['Apellido']."'";
             }// fin if
             if(isset($datos['Dni'])){
-                $where.=" and Dni ='".$datos['Dni']."'"; // cambio a string 
+                //echo("entro al Dni <br>");
+                $where.=" and Dni =".$datos['Dni']; 
             }// fin if
             if(isset($datos['Mail'])){
                 $where.=" and Mail ='".$datos['Mail']."'";
@@ -213,7 +215,7 @@ class AbmPostulante{
             }// fin if
         
         }// fin if
-        var_dump($where);
+        //var_dump($where);
         $obj=new Postulante(); 
         $arreglo=$obj->listar($where);
 

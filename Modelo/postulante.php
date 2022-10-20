@@ -332,6 +332,7 @@ class Postulante extends BaseDatos{
      * @return array 
      */
     public function listar($parametro=""){
+        //var_dump($parametro);
         $arrayPostulantes=array();
         $sql="SELECT * FROM postulante ";
         if($parametro!=""){
