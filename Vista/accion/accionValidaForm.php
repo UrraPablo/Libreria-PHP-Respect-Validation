@@ -43,7 +43,7 @@ if($valido){
         }else {
             $mensaje = "La accion ".$datos['accion']." no pudo concretarse por un error en la base de datos.";
         }
-          //echo("<script>location.href = '../main/index.php?msg=$mensaje';</script>");
+          echo("<script>location.href = '../main/index.php?msg=$mensaje';</script>");
     }
 }else{
   //redireccionar a formCargaCV.php y enviar $datos con document.forms["myform"].submit();
@@ -70,7 +70,7 @@ if($valido){
   ?>
   </form>
   <script>
-  document.forms[""].submit();
+  document.forms["myform"].submit();
   </script>
   <?php
 
