@@ -7,31 +7,32 @@ $datos=data_submitted();
 $objPostulante = new AbmPostulante();
 // LLAMADO AL OBJ QUE CONTIENE LOS ATRIBUTOS DEL POSTULANTE
 $obj=NULL;
-
 if(isset($datos['Dni']) && $datos['Dni'] <> 0){
     $listaPost=$objPostulante->buscar($datos);
     if (count($listaPost)==1){
         $obj= $listaPost[0];
     }
 } 
+
 ?>
 
 <main class="contaier mb-3">
-<div class="container m-5">
-    <h6 class="text-center">Cargue los datos del formulario para completar su curriculum digital</h6>
-</div>
-<div class="container card shadow"> 
-    <form method="post" action="../accion/accionValidaForm.php">
-        <input type="hidden" name="accion" value="<?php echo $datos['accion']; ?>">
-        <!--DATOS PERSONALES -->
-        <div class="container border-bottom border-1 mt-2 pb-4 p-2">
-            <h5 class="fw-bold">Datos Personales</h5>
-            <div class="row">
+    <div class="container m-5">
+        <h6 class="text-center">Cargue los datos del formulario para completar su curriculum digital</h6>
+    </div>
+    <div class="container card shadow"> 
+        <form method="post" action="../accion/accionValidaForm.php">
+            <input type="hidden" name="accion" value="<?php echo $datos['accion']; ?>">
+            <!--DATOS PERSONALES -->
+            <div class="container border-bottom border-1 mt-2 pb-4 p-2">
+                <h5 class="fw-bold">Datos Personales</h5>
+                <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--NOMBRE-->
                         <label for="nombre" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control <?php if (isset($datos['msgNombre'])) {echo ( $datos['msgNombre'] !='ok') ? "is-invalid" : "is-valid";} ?>" id="Nombre" name="Nombre" placeholder="Nombre" 
+                        <input type="text" class="form-control <?php if (isset($datos['msgNombre'])) {echo ( $datos['msgNombre'] !='ok') ? "is-invalid" : "is-valid";} ?>" id="Nombre" name="Nombre" placeholder="Nombre" 
                         <?php
+                        
                         if (isset($datos['Nombre'])) {
                             if ($datos['Nombre']=='null') {
                             echo 'value=""';
@@ -80,25 +81,21 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <!--FECHA NACIMIENTO-->
                         <label for="fechaNacimiento" class="form-label">Fecha Nacimiento:</label>
-                        <input type="date" class="form-control <?php if (isset($datos['msgFechaNacimiento'])) echo ( $datos['msgFechaNacimiento'] !='ok') ? "is-invalid" : "is-valid"; ?>" id="FechaNacimiento" name="FechaNacimiento" placeholder="Fecha Nacimiento" 
+                        <input type="date" class="form-control <?php if (isset($datos['msgFechaNacimiento'])) echo ( $datos['msgFechaNacimiento'] !='ok') ? "is-invalid" : "is-valid"; ?>" id="FechaNacimiento" name="FechaNacimiento"  
                         <?php
                             if (isset($datos['FechaNacimiento'])) {
+                                var_dump($datos['FechaNacimiento']);
                                 if ($datos['FechaNacimiento']=='null') {
-                                echo 'value=""';
+                                    echo 'value=""';
                                 }else{
                                     echo 'value="'.$datos['FechaNacimiento'].'"';
                                 }
                             } else {
                                 if ($obj != null) {
-                                    $fechaNac=$obj->getFechaNacimiento();
-                                    // $fechaNac=date_format($fechaNac,'dd-mm-YY');
-                                    // echo "value='" . $fechaNac . "'";
-                                    $newDate = date("d/m/Y", strtotime($fechaNac));
-                                    $datos['FechaNacimiento']=$newDate;
-                                    echo 'value="'.$datos['FechaNacimiento'].'"';
+                                    echo 'value="'.$obj->getFechaNacimiento().'"';
                                 }
                             }
-                            ?>>
+                            ?> >
                         <?php 
                             if (isset($datos['msgFechaNacimiento'])) echo ($datos['msgFechaNacimiento'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgFechaNacimiento'].'</div>' : '';
                         ?>
@@ -160,11 +157,11 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                                 if ($datos['Telefono']=='null') {
                                 echo 'value=""';
                                 }else{
-                                    echo 'value="'.$datos['Telefono'].'"';
+                                    echo 'value="+54'.$datos['Telefono'].'"';
                                 }
                             } else {
                                 if ($obj != null) {
-                                    echo "value='" . $obj->getTelefono() . "'";
+                                    echo "value='+54" . $obj->getTelefono() . "'";
                                 }
                             }
                             ?>
@@ -239,7 +236,20 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                                     <!--TITULO-->
                                     <div class="mt-3 mb-3">
                                         <label for="Titulo" class="form-label">Titulo</label>
-                                        <input type="text" class="form-control" name="Titulo" id="Titulo">
+                                        <input type="text" class="form-control" name="Titulo" id="Titulo"
+                                        <?php
+                            if (isset($datos['Titulo'])) {
+                                if ($datos['Titulo']=='null') {
+                                echo 'value=""';
+                                }else{
+                                    echo 'value="'.$datos['Titulo'].'"';
+                                }
+                            } else {
+                                if ($obj != null) {
+                                    echo "value='" . $obj->getTitulo() . "'";
+                                }
+                            }
+                            ?> >
                                     </div>
                                 </div>
                             </div>  
@@ -255,7 +265,19 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                                 <div class="accordion-body">
                                     <div class="mb-3">
                                         <label for="textArea" class="form-label">Descripcion</label>
-                                        <textarea class="form-control" name="Experiencia" id="textArea" rows="3" cols="10"></textarea>
+                                        <textarea class="form-control" name="Experiencia" id="textArea" rows="3" cols="10"><?php
+                            if (isset($datos['Experiencia'])) {
+                                if ($datos['Experiencia']=='null') {
+                                echo '';
+                                }else{
+                                    echo $datos['Experiencia'];
+                                }
+                            } else {
+                                if ($obj != null) {
+                                    echo $obj->getExperiencia() ;
+                                }
+                            }
+                            ?></textarea>
                                     </div>
                                 </div>
                             </div>

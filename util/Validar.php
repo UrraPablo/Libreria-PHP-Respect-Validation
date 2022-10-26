@@ -15,7 +15,7 @@ class Validar{
     public function validaNyA($texto){
         $salida=null; 
 
-        $userNameValidator=v::alpha(' ')->notEmpty()->length(null,15);
+        $userNameValidator=v::alpha(' ','á','é','í','ó','ú')->notEmpty()->length(null,15);
        // $userNameValidator->validate($texto);// valida que no este vacio, que contenga solo letras y con una longitud na mayor a 15
         try{
             $userNameValidator->assert($texto); 
@@ -38,12 +38,11 @@ class Validar{
      * @return array
      */
     public function validaFecha($texto){
+        
         $salida=null; 
-        //$edad=""substr($texto,6);
-        //var_dump($edad);
-        //$anioValidado=v::MinAge(15)->MaxAge(100);
-        $userNameValidator=v::date('d/m/Y')->notEmpty()->MinAge(15,'d/m/Y')->MaxAge(100,'d/m/Y');
-       // v::date()->validate('2017-12-31'); // true
+        
+        $userNameValidator=v::date('Y-m-d')->notEmpty()->MinAge(15,'Y-m-d')->MaxAge(100,'Y-m-d');
+       
         try{
             $userNameValidator->assert($texto); 
 
@@ -225,7 +224,7 @@ class Validar{
             $userNameValidator->assert($texto);
         }// fin try
         catch(NestedValidationException $ex){
-            $salida=$ex->getMessages(['identical'=>'{{compareTo}} El nivel de Ingles debe estar en uno de los rangos (basico/intermedio/avanzado)',
+            $salida=$ex->getMessages(['identical'=>'{{compareTo}} El nivel de Inglés debe coincidir con las siguientes opciones (basico/intermedio/avanzado)',
             'alpha'=>'{{name}} Debe contener caracteres alfabetico',
             'notEmpty'=>'{{name}} No debe estar vacio']);
             
@@ -242,7 +241,7 @@ class Validar{
     public function validaTitulo($texto){
         $salida=null; 
 
-        $userNameValidator=v::alpha(' ')->notEmpty()->length(null,25);
+        $userNameValidator=v::alpha(' ','á','é','í','ó','ú')->notEmpty()->length(null,25);
        // $userNameValidator->validate($texto);// valida que no este vacio, que contenga solo letras y con una longitud na mayor a 15
         try{
             $userNameValidator->assert($texto); 

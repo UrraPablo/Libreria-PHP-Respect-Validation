@@ -107,7 +107,6 @@ class AbmPostulante{
     public function alta($datos){
         $salida=false;
         $objPostulante=$this->cargaObjeto($datos);
-        //var_dump($objPostulante);
         if($objPostulante!=null && $objPostulante->insertar()){
             $salida=true;
 
@@ -144,10 +143,8 @@ class AbmPostulante{
      */
     public function modificacion($datos){
         $resp=false; 
-        // $newDate = date("d/m/Y", strtotime($originalDate));
-         $newDate = date("Y-m-d", strtotime($datos['FechaNacimiento']));
-         //var_dump($newDate);
-         $datos['FechaNacimiento'] = $newDate;
+       var_dump($datos);
+
         if($this->seteadoCamposClaves($datos)){
             $objPost=$this->cargaObjeto($datos);
             if($objPost!=null && $objPost->modificar()){

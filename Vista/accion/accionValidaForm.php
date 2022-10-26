@@ -10,9 +10,7 @@ foreach($datos as $key => $value){
             $datos[$key]="";
             }
         }
-$newDate = date("d/m/Y", strtotime($datos['FechaNacimiento']));
-$datos['FechaNacimiento']=$newDate;
-    
+    var_dump($datos);
 $objValidar=new Validar();
 
 $validar['Nombre']=$objValidar->validaNyA($datos['Nombre']);
@@ -32,8 +30,8 @@ $validar['InglesEscrito']=$objValidar->validaIngles($datos['InglesEscrito']);
 if ($validar ['Nombre'] == null && $validar ['Apellido'] == null &&   $validar ['Dni'] == null && $validar ['FechaNacimiento'] == null && $validar ['Mail'] == null && $validar ['Telefono'] == null && $validar ['link'] == null && $validar ['Imagen'] == null && $validar ['Titulo'] == null && $validar ['Estudios'] == null && $validar ['Experiencia'] == null && $validar ['InglesHablado'] == null && $validar ['InglesEscrito'] == null){
     $valido=true;
 }
-//var_dump($validar);
 
+var_dump($validar);
 if($valido){
     $obj = new AbmPostulante();
     $resp = false;
@@ -43,9 +41,9 @@ if($valido){
         if($resp){
             $mensaje = "La accion ".$datos['accion']." se realizo correctamente.";
         }else {
-            $mensaje = "La accion ".$datos['accion']." no pudo concretarse.";
+            $mensaje = "La accion ".$datos['accion']." no pudo concretarse por un error en la base de datos.";
         }
-        echo("<script>location.href = '../main/index.php?msg=$mensaje';</script>");
+          //echo("<script>location.href = '../main/index.php?msg=$mensaje';</script>");
     }
 }else{
   //redireccionar a formCargaCV.php y enviar $datos con document.forms["myform"].submit();
@@ -72,7 +70,7 @@ if($valido){
   ?>
   </form>
   <script>
-  document.forms["myform"].submit();
+  document.forms[""].submit();
   </script>
   <?php
 

@@ -28,6 +28,7 @@ $lista = $obj->buscar(null);
   } else {
     ?>
 <div class="container">
+    <?php  echo (isset($datos['msg']))? '<h5 class="text-center">'.$datos['msg'].'</h5>':''; ?> 
     <h6 class="text-center">Listado de los Curriculums cargados. Seleccione para editar o eliminar.</h6>
 </div>
 <table class="table table-hover">

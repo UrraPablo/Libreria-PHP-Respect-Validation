@@ -218,7 +218,6 @@ class Postulante extends BaseDatos{
                 if($salida>0){
                     $salida=true; 
                     $R=$this->Registro(); // recupera los registros de la tabla  con la ID dada
-                    //setear($name,$apellido,$dni,$fecha,$email,$telefono,$imagen,$estudios,$titulo,$experc,$inglesEscr,$inglesH,$link,$color,$letra)
                     $this->setear($R['Nombre'],$R['Apellido'],$R['Dni'],$R['FechaNacimiento'],$R['Mail'],$R['Telefono'],$R['Imagen'],$R['Estudios'],
                     $R['Titulo'],$R['Experiencia'],$R['InglesEscrito'],$R['InglesHablado'],$R['link'],$R['color'],$R['Letra']);
 
