@@ -14,7 +14,7 @@ $newDate = date("d/m/Y", strtotime($datos['FechaNacimiento']));
 $datos['FechaNacimiento']=$newDate;
     
 $objValidar=new Validar();
-
+// VALIDATCION DE CAMPOS DEL FORMULARIO
 $validar['Nombre']=$objValidar->validaNyA($datos['Nombre']);
 $validar['Apellido']=$objValidar->validaNyA($datos['Apellido']);
 $validar['FechaNacimiento']=$objValidar->validaFecha($datos['FechaNacimiento']);

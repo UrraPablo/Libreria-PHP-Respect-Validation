@@ -42,7 +42,7 @@ class Validar{
         //$edad=""substr($texto,6);
         //var_dump($edad);
         //$anioValidado=v::MinAge(15)->MaxAge(100);
-        $userNameValidator=v::date('d/m/Y')->notEmpty()->MinAge(15,'d/m/Y')->MaxAge(100,'d/m/Y');
+        $userNameValidator=v::date('d/m/Y')->notEmpty()->MinAge(18,'d/m/Y')->MaxAge(55,'d/m/Y');
        // v::date()->validate('2017-12-31'); // true
         try{
             $userNameValidator->assert($texto); 
@@ -53,8 +53,8 @@ class Validar{
                     // If you do not define a name it uses the input to replace this placeholder.
             $salida=$ex->getMessages([
             'notEmpty'=>'{{name}} No puede estar vacio',
-            'minAge'=>'{{name}} No puede ser menor a 15 años',
-            'maxAge'=>'{{name}} No puede superar los 100 años',
+            'minAge'=>'{{name}} No puede ser menor a 18 años',
+            'maxAge'=>'{{name}} No puede superar los 55 años',
             'date'=>'Debe ingresar la fecha segun el formato definido (dd/mm/aaaa)'
             ]); 
 
@@ -82,7 +82,7 @@ class Validar{
         'notEmpty'=>'{{name}} No puede estar vacio',
         'length'=>'{{name}} Debe tener 7 u 8 digitos',
         'min'=>'{{name}} El dni no puede ser menor a 7.000.000',
-        'max'=>'{{name}} El dni no puede ser mayor a 8.000.000'
+        'max'=>'{{name}} El dni no puede ser mayor a 55.000.000'
         ]); // noWhitespace().' '.$notEmpty.' '.$length
 
         }// fin catch

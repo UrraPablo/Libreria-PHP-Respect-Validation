@@ -32,7 +32,7 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                         <label for="nombre" class="form-label">Nombre:</label>
                     <input type="text" class="form-control <?php if (isset($datos['msgNombre'])) {echo ( $datos['msgNombre'] !='ok') ? "is-invalid" : "is-valid";} ?>" id="Nombre" name="Nombre" placeholder="Nombre" 
                         <?php
-                        if (isset($datos['Nombre'])) {
+                        if (isset($datos['Nombre'])) { // DEPENDIENDO DEL VALOR QUE TENGA $datos[Nombre], value lo setea en vacio o con el valor del nombre
                             if ($datos['Nombre']=='null') {
                             echo 'value=""';
                             }else{
@@ -40,8 +40,8 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                             }
                         } else {
                             if ($obj != null) {
-                                echo "value='" . $obj->getNombre() . "'";
-                            }
+                                echo "value='" . $obj->getNombre() . "'"; // Esta parte se utiliza en caso que uno quiera traer un postulante de la Base de Datos
+                            }                                              // En ese caso el campo nombre se autollena 
                         }
                         ?>
                         >
@@ -59,16 +59,16 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                         <label for="apellido" class="form-label">Apellido:</label>
                         <input type="text" class="form-control <?php if (isset($datos['msgApellido'])) echo ( $datos['msgApellido'] !='ok') ? "is-invalid" : "is-valid"; ?>" id="Apellido" name="Apellido" placeholder="Apellido" 
                         <?php
-                        if (isset($datos['Apellido'])) {
-                            if ($datos['Apellido']=='null') {
+                        if (isset($datos['Apellido'])) { // DEPENDIENDO DEL VALOR QUE TENGA $datos[Apellido], value lo setea en vacio o con el valor del Apellido
+                            if ($datos['Apellido']=='null'){ // 
                             echo 'value=""';
                             }else{
                                 echo 'value="'.$datos['Apellido'].'"';
                             }
                         } else {
                             if ($obj != null) {
-                                echo "value='" . $obj->getApellido() . "'";
-                            }
+                                echo "value='" . $obj->getApellido() . "'";// Esta parte se utiliza en caso que uno quiera traer un postulante de la Base de Datos
+                            }                                               // En ese caso el campo apellido se autollena 
                         }
                         ?>
                         >
@@ -82,7 +82,7 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                         <label for="fechaNacimiento" class="form-label">Fecha Nacimiento:</label>
                         <input type="date" class="form-control <?php if (isset($datos['msgFechaNacimiento'])) echo ( $datos['msgFechaNacimiento'] !='ok') ? "is-invalid" : "is-valid"; ?>" id="FechaNacimiento" name="FechaNacimiento" placeholder="Fecha Nacimiento" 
                         <?php
-                            if (isset($datos['FechaNacimiento'])) {
+                            if (isset($datos['FechaNacimiento'])) {// DEPENDIENDO DEL VALOR QUE TENGA fechaNacimiento, value lo setea en vacio o con el valor de a fecha
                                 if ($datos['FechaNacimiento']=='null') {
                                 echo 'value=""';
                                 }else{
@@ -94,8 +94,8 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                                     // $fechaNac=date_format($fechaNac,'dd-mm-YY');
                                     // echo "value='" . $fechaNac . "'";
                                     $newDate = date("d/m/Y", strtotime($fechaNac));
-                                    $datos['FechaNacimiento']=$newDate;
-                                    echo 'value="'.$datos['FechaNacimiento'].'"';
+                                    $datos['FechaNacimiento']=$newDate; // Esta parte se utiliza en caso que uno quiera traer un postulante de la Base de Datos
+                                    echo 'value="'.$datos['FechaNacimiento'].'"';// En ese caso el campo fecha nacimiento se autollena 
                                 }
                             }
                             ?>>
@@ -109,7 +109,7 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                         <input type="number" class="form-control <?php if (isset($datos['msgDni'])) echo ( $datos['msgDni'] !='ok') ? "is-invalid" : "is-valid"; ?>" id="Dni" name="Dni" placeholder="33000111" 
                         
                         <?php
-                            if (isset($datos['Dni'])) {
+                            if (isset($datos['Dni'])) {// DEPENDIENDO DEL VALOR QUE TENGA Dni, value lo setea en vacio o con el valor de a DNI
                                 if ($datos['Dni']=='null') {
                                 echo 'value=""';
                                 }else{
@@ -118,8 +118,8 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                                 
                             } else {
                                 if ($obj != null) {
-                                    echo "value='" . $obj->getDni() . "'";
-                                }
+                                    echo "value='" . $obj->getDni() . "'";// Esta parte se utiliza en caso que uno quiera traer un postulante de la Base de Datos
+                                }                                           // En ese caso el campo dni se autollena 
                             }
                             ?>
                         >  
@@ -133,7 +133,7 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                         <label for="name" class="form-label">Email:</label>
                         <input type="text" class="form-control <?php if (isset($datos['msgMail'])) echo ( $datos['msgMail'] !='ok') ? "is-invalid" : "is-valid"; ?>"  id="Mail" name="Mail" placeholder="ejemplo@gmail.com" 
                         <?php
-                            if (isset($datos['Mail'])) {
+                            if (isset($datos['Mail'])) {// DEPENDIENDO DEL VALOR QUE TENGA Mail, value lo setea en vacio o con el valor del Mail
                                 if ($datos['Mail']=='null') {
                                 echo 'value=""';
                                 }else{
@@ -141,8 +141,8 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                                 }
                             } else {
                                 if ($obj != null) {
-                                    echo "value='" . $obj->getMail() . "'";
-                                }
+                                    echo "value='" . $obj->getMail() . "'";// Esta parte se utiliza en caso que uno quiera traer un postulante de la Base de Datos
+                                }                                           // En ese caso el campo mail  se autollena 
                             }
                             ?>
                         >
@@ -156,7 +156,7 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                         <label for="telefono" class="form-label">Telefono:</label>
                         <input type="text"  id="Telefono" name="Telefono" placeholder="+542994111444" class="form-control <?php if (isset($datos['msgTelefono'])) echo ( $datos['msgTelefono'] !='ok') ? "is-invalid" : "is-valid"; ?>" 
                         <?php
-                            if (isset($datos['Telefono'])) {
+                            if (isset($datos['Telefono'])) {// DEPENDIENDO DEL VALOR QUE TENGA Mail, value lo setea en vacio o con el valor del Telefono
                                 if ($datos['Telefono']=='null') {
                                 echo 'value=""';
                                 }else{
@@ -164,8 +164,8 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                                 }
                             } else {
                                 if ($obj != null) {
-                                    echo "value='" . $obj->getTelefono() . "'";
-                                }
+                                    echo "value='" . $obj->getTelefono() . "'";// Esta parte se utiliza en caso que uno quiera traer un postulante de la Base de Datos
+                                }                                               // En ese caso el campo telefono  se autollena 
                             }
                             ?>
                         >
@@ -178,7 +178,7 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                         <label for="link" class="form-label">Ingrese su Link de Linkdin o Github</label>
                         <input type="text" id="link" name="link" placeholder="https://www.linkedin.com/in/usuario/" class="form-control <?php if (isset($datos['msgLink'])) echo ( $datos['msgLink'] !='ok') ? "is-invalid" : "is-valid"; ?>" 
                         <?php
-                            if (isset($datos['link'])) {
+                            if (isset($datos['link'])) {// DEPENDIENDO DEL VALOR QUE TENGA Mail, value lo setea en vacio o con el valor del link
                                 if ($datos['link']=='null') {
                                 echo 'value=""';
                                 }else{
@@ -186,8 +186,8 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                                 }
                             } else {
                                 if ($obj != null) {
-                                    echo "value='" . $obj->getLink() . "'";
-                                }
+                                    echo "value='" . $obj->getLink() . "'";// Esta parte se utiliza en caso que uno quiera traer un postulante de la Base de Datos
+                                }                                           // En ese caso el campo link  se autollena 
                             }
                             ?>
                         >                                       
@@ -239,7 +239,29 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                                     <!--TITULO-->
                                     <div class="mt-3 mb-3">
                                         <label for="Titulo" class="form-label">Titulo</label>
-                                        <input type="text" class="form-control" name="Titulo" id="Titulo">
+                                        <input type="text" class="form-control <?php if(isset($datos['msgTitulo'])) echo($datos['msgTitulo']!='ok')?"is-invalid":"is-valid"?>" name="Titulo" id="Titulo" placeholder="Titulo"
+                                        <?php
+                                        if(isset($datos['Titulo'])){
+                                            if($datos['Titulo']==null){
+                                                echo('value=""');   
+                                            }
+                                            else{
+                                                echo('value="'.$datos['Titulo'].'"');
+                                                
+                                            }
+                                        }
+                                        else{
+                                            if($obj!=null){
+                                                echo("value='".$obj->getTitulo()."'");
+
+                                            }
+                                        } 
+                                        ?>
+                                        >
+                                        <?php
+                                         if (isset($datos['msgTitulo'])) echo ($datos['msgTitulo'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgTitulo'].'</div>' : '';
+                                       
+                                        ?>
                                     </div>
                                 </div>
                             </div>  
@@ -255,7 +277,31 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                                 <div class="accordion-body">
                                     <div class="mb-3">
                                         <label for="textArea" class="form-label">Descripcion</label>
-                                        <textarea class="form-control" name="Experiencia" id="textArea" rows="3" cols="10"></textarea>
+                                        <textarea class="form-control <?php if(isset($datos['msgExperiencia'])) echo($datos['msgExperiencia']!='ok')?"is-invalid":"is-valid"?>" name="Experiencia" id="textArea" rows="3" cols="10"
+                                        <?php
+                                        if(isset($datos['Experiencia'])){
+                                            if($datos['Experiencia']==null){
+                                                echo('value=""');   
+                                            }
+                                            else{
+                                                echo('value="'.$datos['Experiencia'].'"');
+                                                
+                                            }
+                                        }
+                                        else{
+                                            if($obj!=null){
+                                                echo("value='".$obj->getExperiencia()."'");
+
+                                            }
+                                        } 
+                                        ?>
+                                        >
+                                        <?php
+                                         if (isset($datos['msgExperiencia'])) echo ($datos['msgExperiencia'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgExperiencia'].'</div>' : '';
+                                       
+                                        ?>
+                                        >
+                                    </textarea>
                                     </div>
                                 </div>
                             </div>
