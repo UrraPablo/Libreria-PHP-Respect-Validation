@@ -83,15 +83,15 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                         <label for="fechaNacimiento" class="form-label">Fecha Nacimiento:</label>
                         <input type="date" class="form-control <?php if (isset($datos['msgFechaNacimiento'])) echo ( $datos['msgFechaNacimiento'] !='ok') ? "is-invalid" : "is-valid"; ?>" id="FechaNacimiento" name="FechaNacimiento"  
                         <?php
-                            if (isset($datos['FechaNacimiento'])) {
-                                var_dump($datos['FechaNacimiento']);
-                                if ($datos['FechaNacimiento']=='null') {
-                                    echo 'value=""';
-                                }else{
-                                    echo 'value="'.$datos['FechaNacimiento'].'"';
-                                }
-                            } else {
-                                if ($obj != null) {
+                                if (isset($datos['FechaNacimiento'])) {
+                                    var_dump($datos['FechaNacimiento']);
+                                    if ($datos['FechaNacimiento']=='null') {
+                                        echo 'value=""';
+                                    }else{
+                                        echo 'value="'.$datos['FechaNacimiento'].'"';
+                                    }
+                                } else {
+                                    if ($obj != null) {
                                     echo 'value="'.$obj->getFechaNacimiento().'"';
                                 }
                             }
@@ -173,7 +173,7 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                     <!-- LINK -->
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <label for="link" class="form-label">Ingrese su Link de Linkdin o Github</label>
-                        <input type="text" id="link" name="link" placeholder="https://www.linkedin.com/in/usuario/" class="form-control <?php if (isset($datos['msgLink'])) echo ( $datos['msgLink'] !='ok') ? "is-invalid" : "is-valid"; ?>" 
+                        <input type="text" id="link" name="link" placeholder="https://www.linkedin.com/in/usuario/" class="form-control <?php if (isset($datos['msglink'])) echo ( $datos['msglink'] !='ok') ? "is-invalid" : "is-valid"; ?>" 
                         <?php
                             if (isset($datos['link'])) {
                                 if ($datos['link']=='null') {
@@ -189,14 +189,27 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                             ?>
                         >                                       
                         <?php
-                            if (isset($datos['msgLink'])) echo ($datos['msgLink'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgLink'].'</div>' : '';
+                            if (isset($datos['msglink'])) echo ($datos['msglink'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msglink'].'</div>' : '';
                         ?>
                     </div>
                     <!--FIN DIV DE LINK DE GITHUB O LINKEDIN-->
                     <!--carga de la imagen-->
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <label for="imagen" class="form-label">Imagen de Perfil</label>
-                        <input type="file" id="Imagen" name="Imagen" class="form-control <?php if (isset($datos['msgImagen'])) echo ( $datos['msgImagen'] !='ok') ? "is-invalid" : "is-valid"; ?>" >
+                        <input type="file" id="Imagen" name="Imagen" class="form-control <?php if (isset($datos['msgImagen'])) echo ( $datos['msgImagen'] !='ok') ? "is-invalid" : ""; ?>" 
+                        <?php
+                            // if (isset($datos['Imagen'])) {
+                            //     if ($datos['Imagen']=='null') {
+                            //     echo 'value=""';
+                            //     }else{
+                            //         echo 'value="'.$datos['Imagen'].'"';
+                            //     }
+                            // } else {
+                            //     if ($obj != null) {
+                            //         echo "value='" . $obj->getImagen() . "'";
+                            //     }
+                            // }
+                            ?> value="/lalala.jpg">
                        
                         <?php 
                             if (isset($datos['msgImagen'])) echo ($datos['msgImagen'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgImagen'].'</div>' : '';
@@ -356,10 +369,10 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                     </div>
                 <div class="col-sm-12 col-md-6 mb-3 mt-3">
                     <label  class="form-label" for="letra">Seleccione una Tipografia: </label>
-                    <select class="form-select" aria-label="Default select example" name="Letra" id="letra">
-                        <option value="" selected>letra 1</option>
-                        <option value="">letra 2</option>
-                        <option value="">letra 3</option>
+                    <select class="form-select" aria-label="Default select example" name="Letra" id="Letra">
+                        <option value="Arial" selected>Arial</option>
+                        <option value="Times New Roman">Times</option>
+                        <option value="Colibri">Colibri</option>
                     </select>
                 </div>
             </div> <!--fin row-->

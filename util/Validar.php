@@ -70,7 +70,7 @@ class Validar{
     public function validaDni($dni){
         // noWhitespace()
         $salida=null;
-        $userNameValidator=v::IntVal()->noWhitespace()->notEmpty()->length(7,8)->min(7000000)->max(55000000);
+        $userNameValidator=v::IntVal()->noWhitespace()->notEmpty()->length(7,8)->min(7000000)->max(94000000);
         //$userNameValidator->validate($dni); // valida que el dni sea de tipo entero y que tenga 8 digitos 
         try{
             $userNameValidator->assert($dni);
@@ -81,7 +81,7 @@ class Validar{
         'notEmpty'=>'{{name}} No puede estar vacio',
         'length'=>'{{name}} Debe tener 7 u 8 digitos',
         'min'=>'{{name}} El dni no puede ser menor a 7.000.000',
-        'max'=>'{{name}} El dni no puede ser mayor a 8.000.000'
+        'max'=>'{{name}} El dni no puede ser mayor a 94.000.000'
         ]); // noWhitespace().' '.$notEmpty.' '.$length
 
         }// fin catch
@@ -157,10 +157,10 @@ class Validar{
         }// fin try
         catch(NestedValidationException $ex){
             // contains   {{containsValue}}       
-            $salida=$ex->getMessages(['contains'=>'{{containsValue}} Debe contener las paginas de linkedin o github',
-            'url'=>'{{name}} Debe ser una url válida',
-            'notEmpty'=>'{{name}} La url no puede estar vacia',
-            'noWhitespace'=>'{{name}} La url no puede contener espacios vacios']);
+            $salida=$ex->getMessages(['contains'=>'Debe contener las paginas de linkedin o github',
+            'url'=>'Debe ser una url válida',
+            'notEmpty'=>'La url no puede estar vacia',
+            'noWhitespace'=>'La url no puede contener espacios vacios']);
 
         }// fin catch
 
@@ -266,7 +266,7 @@ class Validar{
     public function validaExperiencia($texto){
         $salida=null; 
 
-        $userNameValidator=v::alpha(' ')->notEmpty()->length(null,400);
+        $userNameValidator=v::alpha(' ','á','é','í','ó','ú')->notEmpty()->length(null,400);
        // $userNameValidator->validate($texto);// valida que no este vacio, que contenga solo letras y con una longitud na mayor a 15
         try{
             $userNameValidator->assert($texto); 
@@ -319,7 +319,7 @@ class Validar{
      */
     public function validaLetra($letra){
         $salida=null;
-        $userNameValidator=v::anyOf(v::alpha(' '),v::alpha('-'))->notEmpty()->length(5,20);
+        $userNameValidator=v::anyOf(v::alpha(' ','-','á','é','í','ó','ú'))->notEmpty()->length(5,20);
         try{
             $userNameValidator->assert($letra);
         }// fin try

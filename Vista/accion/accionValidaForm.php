@@ -1,6 +1,6 @@
 <?php
 include_once '../../configuracion.php';
-include_once '../Estructura/head.php'; 
+
 
 $datos=data_submitted();
 $valido=false;
@@ -9,8 +9,22 @@ foreach($datos as $key => $value){
     if($datos[$key]=='null'){
             $datos[$key]="";
             }
+    }
+
+    if (isset($datos['accion'])){
+      if ($datos['accion']=="borrar"){
+        $obj = new AbmPostulante();
+        $resp = false;
+        $resp = $obj->amb($datos);
+        if($resp){
+            $mensaje = "La accion ".$datos['accion']." se realizo correctamente.";
+        }else {
+            $mensaje = "La accion ".$datos['accion']." no pudo concretarse por un error en la base de datos.";
         }
-    var_dump($datos);
+        echo("<script>location.href = '../main/index.php?msg=$mensaje';</script>");
+      }
+    }
+
 $objValidar=new Validar();
 
 $validar['Nombre']=$objValidar->validaNyA($datos['Nombre']);
@@ -31,7 +45,7 @@ if ($validar ['Nombre'] == null && $validar ['Apellido'] == null &&   $validar [
     $valido=true;
 }
 
-var_dump($validar);
+
 if($valido){
     $obj = new AbmPostulante();
     $resp = false;
@@ -43,11 +57,10 @@ if($valido){
         }else {
             $mensaje = "La accion ".$datos['accion']." no pudo concretarse por un error en la base de datos.";
         }
-          echo("<script>location.href = '../main/index.php?msg=$mensaje';</script>");
+        echo("<script>location.href = '../main/index.php?msg=$mensaje';</script>");
     }
 }else{
   //redireccionar a formCargaCV.php y enviar $datos con document.forms["myform"].submit();
-// var_dump($datos);
 ?>
 
   <form id="myform" name="myform" method="post" action="../main/formCargaCV.php?accion=<?php echo $datos['accion']; ?>">
@@ -77,4 +90,3 @@ if($valido){
   
 }
 
-include_once '../Estructura/footer.php';
