@@ -192,7 +192,7 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                             ?>
                         >                                       
                         <?php
-                        //var_dump($datos['msgLink']);
+                        //var_dump($datos['msglink']);
                             if (isset($datos['msglink'])) echo ($datos['msglink'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msglink'].'</div>' : '';
                         ?>
                     </div>
@@ -240,25 +240,25 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                                     <!--TITULO-->
                                     <div class="mt-3 mb-3">
                                         <label for="Titulo" class="form-label">Titulo</label>
-                                        <input type="text" class="form-control <?php if(isset($datos['msgTitulo'])) echo($datos['msgTitulo']!='ok')?"is-invalid":"is-valid"?>" name="Titulo" id="Titulo" placeholder="Titulo"
+                                        <input type="text" class="form-control <?php if(isset($datos['msgTitulo'])) echo($datos['msgTitulo']!='ok')?"is-invalid":"is-valid"?>" name="Titulo" id="Titulo" placeholder="Titulo">
                                         <?php
-                                        if(isset($datos['Titulo'])){
-                                            if($datos['Titulo']==null){
-                                                echo('value=""');   
-                                            }
-                                            else{
-                                                echo('value="'.$datos['Titulo'].'"');
+                                        //if(isset($datos['Titulo'])){
+                                          //  if($datos['Titulo']==null){
+                                            //    echo('value=""');   
+                                            //}
+                                            //else{
+                                              //  echo('value="'.$datos['Titulo'].'"');
                                                 
-                                            }
-                                        }
-                                        else{
-                                            if($obj!=null){
-                                                echo("value='".$obj->getTitulo()."'");
+                                            //}
+                                        //}
+                                        //else{
+                                          //  if($obj!=null){
+                                            //    echo("value='".$obj->getTitulo()."'");
 
-                                            }
-                                        } 
+                                            //}
+                                        //} 
                                         ?>
-                                        >
+                                        
                                         <?php
                                          if (isset($datos['msgTitulo'])) echo ($datos['msgTitulo'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgTitulo'].'</div>' : '';
                                        
@@ -278,31 +278,32 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                                 <div class="accordion-body">
                                     <div class="mb-3">
                                         <label for="textArea" class="form-label">Descripcion</label>
-                                        <textarea class="form-control <?php if(isset($datos['msgExperiencia'])) echo($datos['msgExperiencia']!='ok')?"is-invalid":"is-valid"?>" name="Experiencia" id="textArea" rows="3" cols="10"
+                                        <textarea class="form-control <?php if(isset($datos['msgExperiencia'])) echo($datos['msgExperiencia']!='ok')?"is-invalid":"is-valid"?>" name="Experiencia" id="textArea" rows="3" cols="10">
+                                        </textarea>
+                                        
                                         <?php
-                                        if(isset($datos['Experiencia'])){
-                                            if($datos['Experiencia']==null){
-                                                echo('value=""');   
-                                            }
-                                            else{
-                                                echo('value="'.$datos['Experiencia'].'"');
+                                        //if(isset($datos['Experiencia'])){
+                                          //  if($datos['Experiencia']==null){
+                                            //    echo('value=""');   
+                                            //}
+                                            //else{
+                                              //  echo('value="'.$datos['Experiencia'].'"');
                                                 
-                                            }
-                                        }
-                                        else{
-                                            if($obj!=null){
-                                                echo("value='".$obj->getExperiencia()."'");
+                                            //}
+                                        //}
+                                        //else{
+                                          //  if($obj!=null){
+                                            //    echo("value='".$obj->getExperiencia()."'");
 
-                                            }
-                                        } 
+                                            //}
+                                        //} 
                                         ?>
-                                        >
+                                        
                                         <?php
                                          if (isset($datos['msgExperiencia'])) echo ($datos['msgExperiencia'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgExperiencia'].'</div>' : '';
-                                       
                                         ?>
-                                        >
-                                    </textarea>
+                                        
+                                    
                                     </div>
                                 </div>
                             </div>

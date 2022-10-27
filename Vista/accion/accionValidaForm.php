@@ -71,6 +71,7 @@ if($valido){
     echo "<input type='hidden' name='msg$key' value='$msg'>";
     
   }
+  //var_dump($validar);
   ?>
   </form>
   <script>

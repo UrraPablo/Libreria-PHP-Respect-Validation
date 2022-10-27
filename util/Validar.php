@@ -256,7 +256,7 @@ class Validar{
     public function validaExperiencia($texto){
         $salida=null; 
 
-        $userNameValidator=v::alpha(' ')->notEmpty()->length(null,400);
+        $userNameValidator=v::alnum(' ')->notEmpty()->length(null,400);
        // $userNameValidator->validate($texto);// valida que no este vacio, que contenga solo letras y con una longitud na mayor a 15
         try{
             $userNameValidator->assert($texto); 
@@ -264,6 +264,7 @@ class Validar{
         }// fin try
         catch(NestedValidationException $ex){
             $salida=$ex->getMessages([
+         'alnum'=>'Solo puede contener numeros o letras ',       
         'notEmpty'=>'{{name}} No puede estar vacio',
         'length'=>'{{name}} No puede superar los 400 caracteres']); 
 
