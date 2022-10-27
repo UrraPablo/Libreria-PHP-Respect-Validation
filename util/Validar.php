@@ -1,7 +1,6 @@
 <?php
 
 // CLASE VALIDAR 
-
 include_once $GLOBALS['ROOT'].'/libs/vendor/autoload.php'; 
 use Respect\Validation\Validator as v; 
 use Respect\Validation\Exceptions\NestedValidationException;
@@ -16,13 +15,15 @@ class Validar{
     public function validaNyA($texto){
         $salida=null; 
 
-        $userNameValidator=v::alpha(' ')->notEmpty()->length(null,15);
-       //
+        $userNameValidator=v::alpha(' ','á','é','í','ó','ú')->notEmpty()->length(null,15);
+       // $userNameValidator->validate($texto);// valida que no este vacio, que contenga solo letras y con una longitud na mayor a 15
         try{
             $userNameValidator->assert($texto); 
 
         }// fin try
         catch(NestedValidationException $ex){
+                    // For all messages, the {{name}} variable is available for templates.
+                    // If you do not define a name it uses the input to replace this placeholder.
             $salida=$ex->getMessages(['alpha'=>'{{name}} Debe contener solo letras',
         'notEmpty'=>'{{name}} No puede estar vacio',
         'length'=>'{{name}} No puede superar los 15 caracteres']); 
@@ -37,21 +38,24 @@ class Validar{
      * @return array
      */
     public function validaFecha($texto){
+        
         $salida=null; 
-        $anio=substr($texto,5);
-        $userNameValidator=v::date('j/m/Y')->notEmpty()->length(null,10);
-        $validaAnio=v::date('Y')->between(1900,2022);
+        
+        $userNameValidator=v::date('Y-m-d')->notEmpty()->MinAge(15,'Y-m-d')->MaxAge(100,'Y-m-d');
+       
         try{
-            $validaAnio->assert($anio);
             $userNameValidator->assert($texto); 
 
         }// fin try
         catch(NestedValidationException $ex){
                     // For all messages, the {{name}} variable is available for templates.
                     // If you do not define a name it uses the input to replace this placeholder.
-            $salida=$ex->getMessages(['notEmpty'=>'{{name}} No puede estar vacio',
-            'date'=>'Debe ser un formato valido de fecha',
-            'between'=>'El año deb estar entre 1900 y 2022']); 
+            $salida=$ex->getMessages([
+            'notEmpty'=>'{{name}} No puede estar vacio',
+            'minAge'=>'{{name}} No puede ser menor a 15 años',
+            'maxAge'=>'{{name}} No puede superar los 100 años',
+            'date'=>'Debe ingresar la fecha segun el formato definido (dd/mm/aaaa)'
+            ]); 
 
         }// fin catch
 
@@ -66,18 +70,22 @@ class Validar{
     public function validaDni($dni){
         // noWhitespace()
         $salida=null;
-        $userNameValidator=v::IntType()->noWhitespace()->notEmpty()->length(8,8);
+        $userNameValidator=v::IntVal()->noWhitespace()->notEmpty()->length(7,8)->min(7000000)->max(94000000);
         //$userNameValidator->validate($dni); // valida que el dni sea de tipo entero y que tenga 8 digitos 
         try{
             $userNameValidator->assert($dni);
         }// fin try
         catch(NestedValidationException $ex){
-            $salida=$ex->getMessages(['intType'=>'{{name}} El dni debe ser un valor entero positivo',
+            $salida=$ex->getMessages(['intVal'=>'{{name}} El dni debe ser un valor entero positivo',
         'noWhitespace'=>'{{name}} No puede tener espacios en blanco',
         'notEmpty'=>'{{name}} No puede estar vacio',
-        'length'=>'{{name}} Debe tener exactamente 8 digitos']);
-        }// fin catch
+        'length'=>'{{name}} Debe tener 7 u 8 digitos',
+        'min'=>'{{name}} El dni no puede ser menor a 7.000.000',
+        'max'=>'{{name}} El dni no puede ser mayor a 94.000.000'
+        ]); // noWhitespace().' '.$notEmpty.' '.$length
 
+        }// fin catch
+         
         return $salida; 
 
     }// fin function validaDni
@@ -89,16 +97,19 @@ class Validar{
     */
     public function validaTelefono($telefono){
         $salida=null; 
-        $userNameValidator=v::digit('+')->noWhitespace()->notEmpty()->length(13,15)->startsWith('+54');
+        $userNameValidator=v::alnum('+',' ')->noWhitespace()->notEmpty()->length(9,15)->StartsWith('+54');
+        //$userNameValidator=v::StartsWith('+54');//->validate($telefono); // valida que comience con la caracteristica de 
+        // argentina , no que esta vacio y sin espacios en blanco. de longitu entre 13 y 15
+        //Si pongo un numero (int) sale un error de codigo que no puedo manejar
         try{
             $userNameValidator->assert($telefono);
         }// fin try 
         catch(NestedValidationException $ex){
-            $salida=$ex->getMessages(['digit'=>'{{name}} El telefono debe tener solo el caracter +',
-            'noWhitespace'=>'{{name}} No debe contener espacios en blanco',
-            'length'=>'{{name}} La cantidad de digitos debe estar entre 13 y 15, considerando el +',
-            'startsWith'=>' El numero debe empezar con +54',
-            'notEmpty'=>'{{name}} El telefono no debe estar vacio']);
+            $salida=$ex->getMessages(['alnum'=>'El telefono debe tener solo el caracter "+" y numeros',
+            'noWhitespace'=>'No debe contener espacios en blanco',
+            'length'=>'La cantidad de digitos debe estar entre 13 y 15, considerando el "+"',
+            'startsWith'=>'El número debe empezar con "+54"',
+            'notEmpty'=>'El teléfono no debe estar vacío']);
         
 
 
@@ -115,7 +126,7 @@ class Validar{
     public function validaIngles($texto){
         $salida=null; 
         $texto=strtolower($texto);
-        $userNameValidator=v::anyOf(v::identical('basico'),v::identical('intermedio'),v::identical('avanzado'))->alpha()->notEmpty();
+        $userNameValidator=v::anyOf(v::identical('on'),v::identical('intermedio'),v::identical('avanzado'))->alpha()->notEmpty();
         // v::anyOf(v::intVal(), v::floatVal())->validate(15.5); // true  {{compareTo}}-> identical
         // con anyOf   el mensaje aparece la ultima condicion dentro , avanzado.
         try{
@@ -146,10 +157,10 @@ class Validar{
         }// fin try
         catch(NestedValidationException $ex){
             // contains   {{containsValue}}       
-            $salida=$ex->getMessages(['contains'=>'{{containsValue}} Debe contener las paginas de linkedin o github',
-            'url'=>'{{name}} Debe ser una url válida',
-            'notEmpty'=>'{{name}} La url no puede estar vacia',
-            'noWhitespace'=>'{{name}} La url no puede contener espacios vacios']);
+            $salida=$ex->getMessages(['contains'=>'Debe contener las paginas de linkedin o github',
+            'url'=>'Debe ser una url válida',
+            'notEmpty'=>'La url no puede estar vacia',
+            'noWhitespace'=>'La url no puede contener espacios vacios']);
 
         }// fin catch
 
@@ -206,14 +217,14 @@ class Validar{
     public function validaEstudios($texto){
         $salida=null; 
         $texto=strtolower($texto);
-        $userNameValidator=v::anyOf(v::identical('Terciario'),v::identical('Secundario'),v::identical('Universitario'))->alpha()->notEmpty();
+        $userNameValidator=v::anyOf(v::identical('terciario'),v::identical('secundario'),v::identical('on'))->alpha()->notEmpty();
         // v::anyOf(v::intVal(), v::floatVal())->validate(15.5); // true  {{compareTo}}-> identical
         // con anyOf   el mensaje aparece la ultima condicion dentro , avanzado.
         try{
             $userNameValidator->assert($texto);
         }// fin try
         catch(NestedValidationException $ex){
-            $salida=$ex->getMessages(['identical'=>'{{compareTo}} El nivel de Ingles debe estar en uno de los rangos (basico/intermedio/avanzado)',
+            $salida=$ex->getMessages(['identical'=>'{{compareTo}} El nivel de Inglés debe coincidir con las siguientes opciones (basico/intermedio/avanzado)',
             'alpha'=>'{{name}} Debe contener caracteres alfabetico',
             'notEmpty'=>'{{name}} No debe estar vacio']);
             
@@ -230,7 +241,7 @@ class Validar{
     public function validaTitulo($texto){
         $salida=null; 
 
-        $userNameValidator=v::alpha(' ')->notEmpty()->length(null,25);
+        $userNameValidator=v::alpha(' ','á','é','í','ó','ú')->notEmpty()->length(null,25);
        // $userNameValidator->validate($texto);// valida que no este vacio, que contenga solo letras y con una longitud na mayor a 15
         try{
             $userNameValidator->assert($texto); 
@@ -255,7 +266,7 @@ class Validar{
     public function validaExperiencia($texto){
         $salida=null; 
 
-        $userNameValidator=v::alpha(' ')->notEmpty()->length(null,400);
+        $userNameValidator=v::alpha(' ','á','é','í','ó','ú')->notEmpty()->length(null,400);
        // $userNameValidator->validate($texto);// valida que no este vacio, que contenga solo letras y con una longitud na mayor a 15
         try{
             $userNameValidator->assert($texto); 
@@ -308,7 +319,7 @@ class Validar{
      */
     public function validaLetra($letra){
         $salida=null;
-        $userNameValidator=v::anyOf(v::alpha(' '),v::alpha('-'))->notEmpty()->length(5,20);
+        $userNameValidator=v::anyOf(v::alpha(' ','-','á','é','í','ó','ú'))->notEmpty()->length(5,20);
         try{
             $userNameValidator->assert($letra);
         }// fin try
@@ -326,5 +337,9 @@ class Validar{
 
 }// fin Clase Validar
 
+$fecha=new Validar();
+$d=12/4/2021;
+$r=$fecha->validaFecha($d);
 
+//var_dump($r);
 ?>

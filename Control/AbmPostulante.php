@@ -105,9 +105,9 @@ class AbmPostulante{
      * @return boolean
      */
     public function alta($datos){
+        
         $salida=false;
         $objPostulante=$this->cargaObjeto($datos);
-        //var_dump($objPostulante);
         if($objPostulante!=null && $objPostulante->insertar()){
             $salida=true;
 
@@ -129,7 +129,6 @@ class AbmPostulante{
             $objPostulante=$this->cargarObjetoConClave($datos);
             if($objPostulante!=null && $objPostulante->eliminar()){
                 $salida=true;
-
             }// fin if 
 
         }// fin if 
@@ -144,6 +143,9 @@ class AbmPostulante{
      */
     public function modificacion($datos){
         $resp=false; 
+
+       var_dump($datos);
+
         if($this->seteadoCamposClaves($datos)){
             $objPost=$this->cargaObjeto($datos);
             if($objPost!=null && $objPost->modificar()){

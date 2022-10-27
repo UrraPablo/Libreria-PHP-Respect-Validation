@@ -3,7 +3,7 @@
 class Postulante extends BaseDatos{
 
     // ATRIBUTOS 
-   // private $id;
+   
     private $nombre;
     private $apellido;
     private $dni;
@@ -44,7 +44,6 @@ class Postulante extends BaseDatos{
 
     // METODO SETEAR
     public function setear($name,$apellido,$dni,$fecha,$email,$telefono,$imagen,$estudios,$titulo,$experc,$inglesEscr,$inglesH,$link,$color,$letra){
-        //$this->setId($id);
         $this->setNombre($name);
         $this->setApellido($apellido);
         $this->setDni($dni);
@@ -55,7 +54,7 @@ class Postulante extends BaseDatos{
         $this->setEstudios($estudios);
         $this->setTitulo($titulo);
         $this->setExperiencia($experc);
-        $this->setIngesEscrito($inglesEscr);
+        $this->setInglesEscrito($inglesEscr);
         $this->setInglesHablado($inglesH);
         $this->setLink($link);
         $this->setColor($color);
@@ -66,9 +65,6 @@ class Postulante extends BaseDatos{
 
 
     // *********METODOS GET***********
-   // public function getId(){
-     //   return $this->id;
-    //}// fin function
     
     public function getNombre(){
         return $this->nombre;
@@ -137,9 +133,6 @@ class Postulante extends BaseDatos{
 
 
     // ********METODOS SET**********
-   // public function setId($id){
-     //   $this->id=$id;
-    //}// fin function
 
     public function setNombre($name){
         $this->nombre=$name;             
@@ -181,7 +174,7 @@ class Postulante extends BaseDatos{
         $this->experiencia=$descripcion;             
     }// fin function
 
-    public function setIngesEscrito($nivelE){
+    public function setInglesEscrito($nivelE){
         $this->inglesEscrito=$nivelE;             
     }// fin function
 
@@ -211,14 +204,13 @@ class Postulante extends BaseDatos{
      */
     public function cargar(){
         $salida=false; // inicializacion del valor de retorno
-        $sql = "SELECT * FROM postulante WHERE dni=".$this->getDni();
+        $sql = "SELECT * FROM postulante WHERE Dni='".$this->getDni()."'";
         if($this->Iniciar()){// inicializa la conexion
             $salida=$this->Ejecutar($sql); 
             if($salida>-1){
                 if($salida>0){
                     $salida=true; 
                     $R=$this->Registro(); // recupera los registros de la tabla  con la ID dada
-                    //setear($name,$apellido,$dni,$fecha,$email,$telefono,$imagen,$estudios,$titulo,$experc,$inglesEscr,$inglesH,$link,$color,$letra)
                     $this->setear($R['Nombre'],$R['Apellido'],$R['Dni'],$R['FechaNacimiento'],$R['Mail'],$R['Telefono'],$R['Imagen'],$R['Estudios'],
                     $R['Titulo'],$R['Experiencia'],$R['InglesEscrito'],$R['InglesHablado'],$R['link'],$R['color'],$R['Letra']);
 
@@ -243,11 +235,10 @@ class Postulante extends BaseDatos{
      */
     public function insertar(){
         $salida=false; // inicializacion del valor de retorno
-        $dni=$this->getDni();
-        $telf=$this->getTelefono();
-        $fecha=$this->getFechaNacimiento();
+        
+        echo $fecha;
         $sql="INSERT INTO postulante (Nombre,Apellido,FechaNacimiento,Dni,Mail,Telefono,Imagen,Estudios,Titulo,Experiencia,InglesEscrito,InglesHablado,link,color,letra)
-        VALUES ('".$this->getNombre()."','".$this->getApellido()."',$fecha,$dni,'".$this->getMail()."',$telf,'".$this->getImagen()."','".$this->getEstudios()."','".$this->getTitulo()."',
+        VALUES ('".$this->getNombre()."','".$this->getApellido()."','".$this->getFechaNacimiento()."','".$this->getDni()."','".$this->getMail()."','".$this->getTelefono()."','".$this->getImagen()."','".$this->getEstudios()."','".$this->getTitulo()."',
         '".$this->getExperiencia()."','".$this->getInglesEscrito()."','".$this->getInglesHablado()."','".$this->getLink()."','".$this->getColor()."','".$this->getLetra()."');"; 
         if($this->Iniciar()){
             if($this->Ejecutar($sql)){
@@ -275,9 +266,9 @@ class Postulante extends BaseDatos{
      */
     public function modificar(){
         $salida=false;
-        $sql="UPDATE postulante SET Nombre='".$this->getNombre()."', Apellido='".$this->getApellido()."', FechaNacimiento=".$this->getFechaNacimiento().", Mail='".$this->getMail()."',Telefono=".$this->getTelefono().", Imagen='".$this->getImagen()."', Estudios='".$this->getEstudios()."', Titulo='".$this->getTitulo()."', 
+        $sql="UPDATE postulante SET Nombre='".$this->getNombre()."', Apellido='".$this->getApellido()."', FechaNacimiento='".$this->getFechaNacimiento()."', Mail='".$this->getMail()."',Telefono=".$this->getTelefono().", Imagen='".$this->getImagen()."', Estudios='".$this->getEstudios()."', Titulo='".$this->getTitulo()."', 
         Experiencia='".$this->getExperiencia()."', InglesEscrito='".$this->getInglesEscrito()."', InglesHablado='".$this->getInglesHablado()."', link='".$this->getLink()."', color='".$this->getColor()."', letra='".$this->getLetra()."'
-         WHERE Id=".$this->getDni();
+         WHERE Dni='".$this->getDni()."'";
         if($this->Iniciar()){
             if($this->Ejecutar($sql)){
                 $salida=true;
@@ -306,7 +297,7 @@ class Postulante extends BaseDatos{
      */
     public function eliminar(){
         $salida=false;
-        $sql="DELETE FROM postulante WHERE Id=".$this->getDni();
+        $sql="DELETE FROM postulante WHERE Dni=".$this->getDni();
         if($this->Iniciar()){
             if($this->Ejecutar($sql)){
                 $salida=true;
