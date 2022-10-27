@@ -178,7 +178,7 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                         <label for="link" class="form-label">Ingrese su Link de Linkdin o Github</label>
                         <input type="text" id="link" name="link" placeholder="https://www.linkedin.com/in/usuario/" class="form-control <?php if (isset($datos['msgLink'])) echo ( $datos['msgLink'] !='ok') ? "is-invalid" : "is-valid"; ?>" 
                         <?php
-                            if (isset($datos['link'])) {// DEPENDIENDO DEL VALOR QUE TENGA Mail, value lo setea en vacio o con el valor del link
+                            if (isset($datos['link'])) {// DEPENDIENDO DEL VALOR QUE TENGA link, value lo setea en vacio o con el valor del link
                                 if ($datos['link']=='null') {
                                 echo 'value=""';
                                 }else{
@@ -192,7 +192,8 @@ if(isset($datos['Dni']) && $datos['Dni'] <> 0){
                             ?>
                         >                                       
                         <?php
-                            if (isset($datos['msgLink'])) echo ($datos['msgLink'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msgLink'].'</div>' : '';
+                        //var_dump($datos['msgLink']);
+                            if (isset($datos['msglink'])) echo ($datos['msglink'] !=null) ? '<div id="validationServer03Feedback" class="invalid-feedback">'.$datos['msglink'].'</div>' : '';
                         ?>
                     </div>
                     <!--FIN DIV DE LINK DE GITHUB O LINKEDIN-->

@@ -49,7 +49,7 @@ if($valido){
     }
 }else{
   //redireccionar a formCargaCV.php y enviar $datos con document.forms["myform"].submit();
-// var_dump($datos);
+
 ?>
 
   <form id="myform" name="myform" method="post" action="../main/formCargaCV.php?accion=<?php echo $datos['accion']; ?>">
@@ -60,6 +60,7 @@ if($valido){
     if ($value==null){
       $msg= 'ok';
       echo "<input type='hidden' name='$key' value='$datos[$key]'>";
+      //echo($key."<br>");
     } else {
       echo "<input type='hidden' name='$key'  >";
       foreach ($value as $key1 => $value1) {
@@ -68,6 +69,7 @@ if($valido){
     }
     
     echo "<input type='hidden' name='msg$key' value='$msg'>";
+    
   }
   ?>
   </form>

@@ -22,8 +22,6 @@ class Validar{
 
         }// fin try
         catch(NestedValidationException $ex){
-                    // For all messages, the {{name}} variable is available for templates.
-                    // If you do not define a name it uses the input to replace this placeholder.
             $salida=$ex->getMessages(['alpha'=>'{{name}} Debe contener solo letras',
         'notEmpty'=>'{{name}} No puede estar vacio',
         'length'=>'{{name}} No puede superar los 15 caracteres']); 
@@ -39,18 +37,12 @@ class Validar{
      */
     public function validaFecha($texto){
         $salida=null; 
-        //$edad=""substr($texto,6);
-        //var_dump($edad);
-        //$anioValidado=v::MinAge(15)->MaxAge(100);
         $userNameValidator=v::date('d/m/Y')->notEmpty()->MinAge(18,'d/m/Y')->MaxAge(55,'d/m/Y');
-       // v::date()->validate('2017-12-31'); // true
         try{
             $userNameValidator->assert($texto); 
 
         }// fin try
         catch(NestedValidationException $ex){
-                    // For all messages, the {{name}} variable is available for templates.
-                    // If you do not define a name it uses the input to replace this placeholder.
             $salida=$ex->getMessages([
             'notEmpty'=>'{{name}} No puede estar vacio',
             'minAge'=>'{{name}} No puede ser menor a 18 años',
@@ -83,7 +75,7 @@ class Validar{
         'length'=>'{{name}} Debe tener 7 u 8 digitos',
         'min'=>'{{name}} El dni no puede ser menor a 7.000.000',
         'max'=>'{{name}} El dni no puede ser mayor a 55.000.000'
-        ]); // noWhitespace().' '.$notEmpty.' '.$length
+        ]); 
 
         }// fin catch
          
@@ -100,8 +92,8 @@ class Validar{
         $salida=null; 
         $userNameValidator=v::alnum('+',' ')->noWhitespace()->notEmpty()->length(9,15)->StartsWith('+54');
         //$userNameValidator=v::StartsWith('+54');//->validate($telefono); // valida que comience con la caracteristica de 
-        // argentina , no que esta vacio y sin espacios en blanco. de longitu entre 13 y 15
-        //Si pongo un numero (int) sale un error de codigo que no puedo manejar
+        // argentina +54 , no que esta vacio y sin espacios en blanco. de longitud entre 13 y 15
+        
         try{
             $userNameValidator->assert($telefono);
         }// fin try 
@@ -128,8 +120,6 @@ class Validar{
         $salida=null; 
         $texto=strtolower($texto);
         $userNameValidator=v::anyOf(v::identical('on'),v::identical('intermedio'),v::identical('avanzado'))->alpha()->notEmpty();
-        // v::anyOf(v::intVal(), v::floatVal())->validate(15.5); // true  {{compareTo}}-> identical
-        // con anyOf   el mensaje aparece la ultima condicion dentro , avanzado.
         try{
             $userNameValidator->assert($texto);
         }// fin try
@@ -151,7 +141,8 @@ class Validar{
     public function validaLink($url){
         $url=strtolower($url); 
         $salida=null;
-        $userNameValidator=v::anyOf(v::contains('linkedin'),v::contains('github'))->url()->notEmpty()->noWhitespace(); // valida si es un link correcto y contiene 
+        $userNameValidator=v::anyOf(v::contains('linkedin'),v::contains('github'))->url()->notEmpty()->noWhitespace(); 
+        // valida si es un link correcto y contiene 
         // la palabra linkedin o github
         try{
             $userNameValidator->assert($url);
@@ -219,8 +210,6 @@ class Validar{
         $salida=null; 
         $texto=strtolower($texto);
         $userNameValidator=v::anyOf(v::identical('terciario'),v::identical('secundario'),v::identical('on'))->alpha()->notEmpty();
-        // v::anyOf(v::intVal(), v::floatVal())->validate(15.5); // true  {{compareTo}}-> identical
-        // con anyOf   el mensaje aparece la ultima condicion dentro , avanzado.
         try{
             $userNameValidator->assert($texto);
         }// fin try
@@ -274,8 +263,6 @@ class Validar{
 
         }// fin try
         catch(NestedValidationException $ex){
-                    // For all messages, the {{name}} variable is available for templates.
-                    // If you do not define a name it uses the input to replace this placeholder.
             $salida=$ex->getMessages([
         'notEmpty'=>'{{name}} No puede estar vacio',
         'length'=>'{{name}} No puede superar los 400 caracteres']); 
