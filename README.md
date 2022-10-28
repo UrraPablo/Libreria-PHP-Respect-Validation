@@ -38,18 +38,20 @@ Otras características de la librería son:
 # ***Instalación*** 
 Para la instalación de la librería, se necesita previamente instalar ***Composer***. **Composer** es un gestor de librerías de PHP, el cual facilita la instalación de cualquier librería. Para obetenerlo abra el siguiente link <https://getcomposer.org/download/>.  Si su sistema operativo es Windows debe descargar y ejecutar [Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe). Para el caso de Linux debe que seguir los pasos explicados en <https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos>. 
 
-***Nota Importante:** Composer* requiere que la versión de PHP sea ***7.2.5*** o una superior. Para el caso de la presente *librería* es necesario que la versión de PHP sea ***7.3*** o superior.  
+***Nota Importante:** Composer* requiere que la versión de PHP sea ***7.2.5*** o una superior. Para el caso de la presente *librería* es necesario que la versión de PHP sea ***7.3*** o superior. 
 
-Para verificar la instalación de Composer o conocer los datos de la instalación, escriba en la consola (símbolo de sistema en Windows) el siguiente comando: *composer -v*
+
+Para verificar la instalación de Composer o conocer los datos de la instalación, escriba en la consola (símbolo de sistema en Windows) el siguiente comando: ``` composer -v ```
 
 Una vez instalado composer, la instalación de la librería se realiza de la siguiente manera:
 
 - Crear el directorio donde se guardará el proyecto.
-- Utilizando la consola, ubicarse dentro del directorio raiz del proyecto y escribir ***composer require respect/validation***. 
+- Utilizando la consola, ubicarse dentro del directorio raiz del proyecto y escribir ``` composer require respect/validation ```
 
 Se crearan los directorios y archivos neccesarios dentro del directorio vendor se encuentran los directorios de las librerías instaladas por Composer y los archivos composer y composer.lock son archivos de configuración del gestor. 
 
 # ***Uso de la Librería*** 
+***Consultar la Documentación Oficial en [Respect/Validation](https://respect-validation.readthedocs.io/en/latest/).***
 En este ejemplo, la librería se guardó en la carpeta libs. Para hacer uso de la misma se creó una ***clase*** llamada ***Validar.php*** donde se llama a las clases necesarias para su uso. 
 
 Para poder utilizar cualquier librería instalada por Composer se debe incluir el archivo autoload.php creado dentro del directorio vendor. ***Validator*** y ***NestedValidationException*** son las clases que se usará para aplicar las reglas de validación y el manejo de excepciones. En este caso ***v*** se usa como un alias para llamar a los métodos de la clase.   
